@@ -18,7 +18,7 @@ function BookContainer(){
     }, [])
 
     return(
-        <div>
+        <Switch>
             <Route exact path="/books">
                 <BookList books={books} setBooks={setBooks} />
             </Route>
@@ -35,7 +35,7 @@ function BookContainer(){
                 book={books.find((book) => book.id === parseInt(match.params.id))}
                 setBooks={setBooks} />
             </Route> */}
-        </div>
+        </Switch>
     )
 }
 

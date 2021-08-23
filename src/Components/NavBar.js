@@ -4,10 +4,11 @@ function NavBar(){
 
     return(
         <div>
-            <BrowserRouter>
+        
+                <NavLink to="/">Home</NavLink>
                 <NavLink to="/books">Books</NavLink>
                 <NavLink to="/users">Users</NavLink>
-            </BrowserRouter>
+        
         </div>
     )
 }
