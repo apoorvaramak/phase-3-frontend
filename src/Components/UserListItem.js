@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 function UserListItem({ user }){
     // const id = useParams()
@@ -7,14 +7,16 @@ function UserListItem({ user }){
         return (<p>Book: {review.book_id} Review: {review.content} Rating: {review.rating}</p>)
     })
 
+    let history = useHistory();
+
+    function handleShowDetails(){
+        history.push(`/users/${user.id}`)        
+    }
+
     return(
         <div>
-            <div className="detail-div">
+            <div className="detail-div" onClick = {handleShowDetails}>
                 <p>Name: {user.name}</p>
-                <p>Birthday: {user.birthday}</p>
-                <p>XP: {user.xp}</p>
-                <p>Level: {user.xp}</p>
-                <p>{reviewMap}</p>
             </div> 
         </div>
     )

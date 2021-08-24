@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, useParams, useRouteMatch } from 'react-router-dom'
 import BookList from './BookList'
+import BookDetail from './BookDetail'
 
 
 
@@ -17,25 +18,27 @@ function BookContainer(){
         .then(data => setBooks(data))
     }, [])
 
+    const match = useRouteMatch()
     return(
+        <BrowserRouter>
         <Switch>
-            <Route exact path="/books">
+            <Route path={`${match.url}/:id`}>
+                <BookDetail books={books}/>
+            </Route>
+            <Route exact path={match.url}>
                 <BookList books={books} setBooks={setBooks} />
             </Route>
             {/* <Route exact path="/books/add">
                 <AddBookForm books={books} setBooks={setBooks} />
             </Route> */}
-            {/* <Route exact path="/books/:id">
-                <BookDetail books={books} setBooks={setBooks} 
-                book={books.find((book) => book.id === parseInt(match.params.id))}/>
-            </Route>
-            <Route exact path="/books/:id/edit">
+            {/* <Route exact path="/books/:id/edit">
                 <EditBookInfo 
                 books={books} 
                 book={books.find((book) => book.id === parseInt(match.params.id))}
                 setBooks={setBooks} />
             </Route> */}
         </Switch>
+        </BrowserRouter>
     )
 }
 
