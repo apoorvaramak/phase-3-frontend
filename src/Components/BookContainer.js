@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import BookList from './BookList'
+import BookListItem from './BookListItem'
 
 
 
@@ -18,6 +19,7 @@ function BookContainer(){
     }, [])
 
     return(
+        <BrowserRouter>
         <Switch>
             <Route exact path="/books">
                 <BookList books={books} setBooks={setBooks} />
@@ -25,17 +27,17 @@ function BookContainer(){
             {/* <Route exact path="/books/add">
                 <AddBookForm books={books} setBooks={setBooks} />
             </Route> */}
-            {/* <Route exact path="/books/:id">
-                <BookDetail books={books} setBooks={setBooks} 
-                book={books.find((book) => book.id === parseInt(match.params.id))}/>
+            <Route exact path="/books/:id">
+                <BookListItem books={books} />
             </Route>
-            <Route exact path="/books/:id/edit">
+            {/* <Route exact path="/books/:id/edit">
                 <EditBookInfo 
                 books={books} 
                 book={books.find((book) => book.id === parseInt(match.params.id))}
                 setBooks={setBooks} />
             </Route> */}
         </Switch>
+        </BrowserRouter>
     )
 }
 
