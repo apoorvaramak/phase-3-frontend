@@ -7,6 +7,9 @@ import UserContainer from './Components/UserContainer';
 import UserListItem from './Components/UserListItem';
 
 function App() {
+  const [isClickedUser, setIsClickedUser] = useState(false)
+  const [isClickedBook, setIsClickedBook] = useState(false)
+
   // const [users, setUsers] = useState([])
   //original fetch
   // useEffect(() => {
@@ -34,10 +37,10 @@ function App() {
   return (
     <div className="App">
       TEST HELLO
-        <NavBar />
+        <NavBar  setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook}/>
         {/* <Switch> */}
-          <Route exact path="/books">
-            <BookContainer />
+          <Route path="/books">
+            <BookContainer setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} />
           </Route>
           {/* <Route
             exact path="/users/:id"
@@ -53,8 +56,8 @@ function App() {
               />
             )}
             }/> */}
-          <Route exact path="/users">
-            <UserContainer/>
+          <Route path="/users">
+            <UserContainer setIsClickedUser={setIsClickedUser} isClickedUser={isClickedUser} />
           </Route>
         {/* </Switch> */}
     </div>

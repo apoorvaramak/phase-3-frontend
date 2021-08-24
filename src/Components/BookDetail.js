@@ -1,5 +1,6 @@
+import { findAllByTestId } from '@testing-library/react';
 import { Route, Switch, useHistory, useParams, Link } from 'react-router-dom';
-function BookDetail({books}){
+function BookDetail({books, setIsClickedBook}){
     console.log("hi")
 
     const id = useParams().id
@@ -17,6 +18,10 @@ function BookDetail({books}){
     const reviewMap = book.reviews.map((review) => {
         return (<p key={review.id}>Review: {review.content} Rating: {review.rating}</p>)
     })
+
+    function handleClick(){
+        setIsClickedBook(false)
+    }
 
     function onSubmit(){
         // fetch(`${process.env.REACT_APP_API_URL}/books`, {
@@ -48,7 +53,7 @@ function BookDetail({books}){
                     <input type="text" placeholder="add review..."/>
                     <button type="submit">Submit</button>
                 </form>
-                <Link to="/books">Go back</Link>
+                <Link to="/books" onClick={handleClick} >Go back</Link>
             </div>
         </div>
     )

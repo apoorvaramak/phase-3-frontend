@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory, Link, Route } from 'react-router-dom';
+import UserDetail from './UserDetail'
 
-function UserListItem({ user }){
-    // const id = useParams()
+function UserListItem({ user, users, setIsClickedUser }){
+    const params = useParams()
     const reviewMap = user.reviews.map((review) => {
         return (<p>Book: {review.book_id} Review: {review.content} Rating: {review.rating}</p>)
     })
@@ -13,12 +14,19 @@ function UserListItem({ user }){
     //     history.push(`/users/${user.id}`)        
     // }
 
+    function handleClick(){
+        setIsClickedUser(true)
+    }
     return(
         <div>
             {/* <div className="detail-div" onClick = {handleShowDetails}> */}
             <div className="detail-div" >
-                <p><Link to={`/users/${user.id}`}>Name: {user.name}</Link></p>
+                <p><Link to={`/users/${user.id}`} onClick={handleClick}>Name: {user.name}</Link></p>
             </div> 
+            {/* <Route path="/users/:id">
+                <UserDetail key={params.id} user={user}/>
+            </Route> */}
+
         </div>
     )
 

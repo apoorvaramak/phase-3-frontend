@@ -3,7 +3,7 @@ import UserList from './UserList'
 // import { Route, Switch, useRouteMatch } from 'react-router-dom';
 // import UserDetail from './UserDetail'
 
-function UserContainer(){
+function UserContainer({ setIsClickedUser, isClickedUser }){
     const[users, setUsers] = useState([]);
 
 
@@ -23,19 +23,8 @@ function UserContainer(){
 
     return(
         <div>
-                <UserList users={users} setUsers={setUsers} />
+                <UserList users={users} setUsers={setUsers} setIsClickedUser={setIsClickedUser} isClickedUser={isClickedUser}/>
         </div>
-                // <Route path={`${match.url}/:id`}>
-                //     <UserDetail users={users}/>
-                // </Route>
-        // <BrowserRouter>
-        //     <Route exact path={match.url}>
-            // </Route>
-            //  <Route exact path="/books/add">
-                // <AddBookForm books={books} setBooks={setBooks} />
-            // </Route> */}
-            
-        // </BrowserRouter>
     )
 }
 
