@@ -14,7 +14,7 @@ function UserDetail({users}){
     }
 
     const reviewMap = user.reviews.map((review) => {
-        return (<p key={review.id}>Review: {review.content} Rating: {review.rating}</p>)
+        return (<p key={review.id}>Book: {review.book.title} Review: {review.content} Rating: {review.rating}</p>)
     })
     //this works to show all info we want, but we want the "detail-div" to be its own page with its own url - ?params? 
     return(
