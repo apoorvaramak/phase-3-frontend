@@ -1,6 +1,6 @@
 import BookListItem from './BookListItem'
 import BookDetail from './BookDetail'
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 function BookList({ books, setBooks }){
 
@@ -11,10 +11,15 @@ function BookList({ books, setBooks }){
     // const bookSpecific = books.map((book) => {
     //     return <BookDetail key={book.id} book={book}/>
     // })
+    const match = useRouteMatch()
 
     return  (
         <div>
         {bookconstant}
+        <Route path={`${match.url}/:id`}>
+            <BookDetail books={books}/>
+        </Route>
+         
         </div>
     )
 

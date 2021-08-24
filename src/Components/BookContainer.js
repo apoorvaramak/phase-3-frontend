@@ -20,11 +20,10 @@ function BookContainer(){
 
     const match = useRouteMatch()
     return(
-        <BrowserRouter>
         <Switch>
-            <Route path={`${match.url}/:id`}>
+            {/* <Route path={`${match.url}/:id`}>
                 <BookDetail books={books}/>
-            </Route>
+            </Route> */}
             <Route exact path={match.url}>
                 <BookList books={books} setBooks={setBooks} />
             </Route>
@@ -38,7 +37,6 @@ function BookContainer(){
                 setBooks={setBooks} />
             </Route> */}
         </Switch>
-        </BrowserRouter>
     )
 }
 

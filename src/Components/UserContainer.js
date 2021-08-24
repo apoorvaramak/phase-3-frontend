@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, useRouteMatch } from 'react-router-dom';
 import UserList from './UserList'
-import UserDetail from './UserDetail'
+// import { Route, Switch, useRouteMatch } from 'react-router-dom';
+// import UserDetail from './UserDetail'
 
 function UserContainer(){
     const[users, setUsers] = useState([]);
@@ -17,30 +17,25 @@ function UserContainer(){
         .then(data => setUsers(data))
     }, [])
 
-    const match = useRouteMatch()
+    // const match = useRouteMatch()
 
 
 
     return(
-        <BrowserRouter>
-        <Switch>
-            <Route path={`${match.url}/:id`}>
-                <UserDetail users={users}/>
-            </Route>
-            <Route exact path={match.url}>
+        <div>
                 <UserList users={users} setUsers={setUsers} />
-            </Route>
-            {/* <Route exact path="/books/add">
-                <AddBookForm books={books} setBooks={setBooks} />
-            </Route> */}
-            {/* <Route exact path="/books/:id/edit">
-                <EditBookInfo 
-                books={books} 
-                book={books.find((book) => book.id === parseInt(match.params.id))}
-                setBooks={setBooks} />
-            </Route> */}
-        </Switch>
-        </BrowserRouter>
+        </div>
+                // <Route path={`${match.url}/:id`}>
+                //     <UserDetail users={users}/>
+                // </Route>
+        // <BrowserRouter>
+        //     <Route exact path={match.url}>
+            // </Route>
+            //  <Route exact path="/books/add">
+                // <AddBookForm books={books} setBooks={setBooks} />
+            // </Route> */}
+            
+        // </BrowserRouter>
     )
 }
 
