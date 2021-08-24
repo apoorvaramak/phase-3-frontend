@@ -12,6 +12,8 @@ code {
     monospace;
 }
 
+
+/*Review Details Upon Click*/
 .detail-div {
   border: 1px solid black
 }
@@ -19,3 +21,33 @@ code {
 .list-div {
   border: 1px solid black
 }
+
+/*NavBar*/
+.navigation {
+  position: relative;
+  flex-direction: row;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 25px;
+  align-items: center;
+}
+
+.navigation li {
+  text-decoration: none;
+  list-style: none;
+  font-weight: 500;
+  margin-left: 30px;
+  margin-right: 30px;
+  background-color: #7e7cfc;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; 
+}
+
+.navigation li:hover {
+  color: black;
+  background-color: #cfcff5;
+} 

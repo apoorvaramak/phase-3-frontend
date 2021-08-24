@@ -7,9 +7,9 @@ function BookListItem({book}){
         setShowDetails(!showDetails)
     }
     const reviewMap = book.reviews.map((review) => {
-        return (<p>Review: {review.content} Rating: {review.rating}</p>)
+        return (<p key={review.id}>Review: {review.content} Rating: {review.rating}</p>)
     })
-
+    //this works to show all info we want, but we want the "detail-div" to be its own page with its own url - ?params? 
     return(
         <div>
             {showDetails ? 
@@ -19,8 +19,7 @@ function BookListItem({book}){
                 <p>Publisher: {book.publisher}</p>
                 <p>Genre: {book.genre}</p>
                 <p>Page Count: {book.page_count}</p>
-                <p>{reviewMap}</p>
-
+                <div>{reviewMap}</div>
             </div> :
             <div onClick={handleShowDetails} className="list-div">
                 <p>Title: {book.title}</p>
