@@ -34,9 +34,8 @@ function App() {
   return (
     <div className="App">
       TEST HELLO
-      <BrowserRouter>
         <NavBar />
-        <Switch>
+        {/* <Switch> */}
           <Route exact path="/books">
             <BookContainer />
           </Route>
@@ -54,11 +53,10 @@ function App() {
               />
             )}
             }/> */}
-        <Route exact path="/users">
+          <Route exact path="/users">
             <UserContainer/>
           </Route>
-        </Switch>
-      </BrowserRouter>
+        {/* </Switch> */}
     </div>
   );
 }
