@@ -4,7 +4,7 @@ import BookList from './BookList'
 
 
 
-function BookContainer({ isClickedBook, setIsClickedBook}){
+function BookContainer({ isClickedBook, setIsClickedBook, currentUser }){
     const [books, setBooks] = useState([])
 
     useEffect(() => {
@@ -20,7 +20,7 @@ function BookContainer({ isClickedBook, setIsClickedBook}){
     // const match = useRouteMatch()
     return(
         <div>
-            <BookList books={books} setBooks={setBooks}  setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} />
+            <BookList books={books} setBooks={setBooks}  setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} />
         </div>
     )
 }

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-function BookDetail({books, setBooks, setIsClickedBook}){
+function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
     //form set up for reviews no user_id do we want to keep or hardcode a user_id?
+    // console.log("BookDetail", currentUser.id)
     const [addReviewFormData, setAddReviewFormData] = useState({
         content: "",
         rating: "",
         book_id: parseInt(useParams().id),
+        user_id: parseInt(currentUser.id),
         id: null
     })
 
@@ -17,11 +19,13 @@ function BookDetail({books, setBooks, setIsClickedBook}){
     const [reviews, setReviews] = useState(book.reviews)
 
     const reviewMap = reviews.map((review) => {
+        console.log(review.user.id)
         return (
             <div key = {review.id}>
-                <p key={review.id}>Review: {review.content} Rating: {review.rating}</p>
-                <button name={review.id} onClick={onEditReviewClick}>Edit Review</button>
-                <button name ={review.id} onClick ={deleteReview}>Delete Review</button>
+                {/* <p key={review.id}>User: {review.user.name} Review: {review.content} Rating: {review.rating}</p> */}
+                <p>Review: {review.content} Rating: {review.rating}</p>
+                {review.user.id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
+                {review.user.id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
             </div>
         )
     })
@@ -59,7 +63,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         let value = e.target.value
         setAddReviewFormData({
             ...addReviewFormData,
-            [key]: value
+            [key]: value,
         })
     }
 
@@ -68,7 +72,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
     function onSubmit(e){
         e.preventDefault()
         if (!isEditReview) {
-            console.log('post')
+            console.log('post', addReviewFormData)
             fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
                 method: "POST",
                 header: {
@@ -79,13 +83,16 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             })
             .then(response => response.json())
             .then(data => {
+                console.log('AddReview response data:', data)
                 // reviews.push(data)
-                let index = books.findIndex(oneBook => oneBook.id === book.id)
+                // let index = books.findIndex(oneBook => oneBook.id === book.id)
                 setReviews([data, ...reviews])
-                setAddReviewFormData({   
+                console.log("did we get this far? Reviews:", reviews)
+                setAddReviewFormData({  
                     content: "",
                     rating: "",
                     book_id: book.id,
+                    user_id: currentUser.id,
                     id: null
                 })
             }) 
@@ -104,13 +111,14 @@ function BookDetail({books, setBooks, setIsClickedBook}){
                 setIsEditReview(false)
                 let reviewId = reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
                 reviews[reviewId] = editedReviewData
-                let index = books.findIndex(oneBook => oneBook.id === book.id)
-                books[index] = book
+                // let index = books.findIndex(oneBook => oneBook.id === book.id)
+                // books[index] = book
                 setReviews(reviews)
                 setAddReviewFormData({   
                     content: "",
                     rating: "",
                     book_id: book.id,
+                    user_id: currentUser.id,
                     id: null
                 })
             }) 
@@ -138,13 +146,15 @@ function BookDetail({books, setBooks, setIsClickedBook}){
                 <p>Page Count: {book.page_count}</p>
                 <div>{reviewMap}</div>
                 <h3>Add a Review</h3>
-                <form onSubmit={onSubmit}>
+                {Object.keys(currentUser).length === 0 ?
+                    <h3>Please select a user</h3> :
+                    <form onSubmit={onSubmit}>
                     <label htmlFor="rating">Rating(1-5): </label>
                     <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" name="rating" min="1" max="5" placeholder="1-5"/>
                     <label htmlFor="content">Review:</label>
                     <input onChange={manageReviewFormData} value={addReviewFormData.content} type="text" name="content" placeholder="add review..."/>
                     <button type="submit">Submit</button>
-                </form>
+                </form>}
                 <Link to="/books" onClick={handleClick} >Go back</Link>
             </div>
         </div>

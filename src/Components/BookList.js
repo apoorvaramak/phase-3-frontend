@@ -2,7 +2,7 @@ import BookListItem from './BookListItem'
 import BookDetail from './BookDetail'
 import { Route, useParams, useRouteMatch } from 'react-router-dom';
 
-function BookList({ books, setBooks, isClickedBook, setIsClickedBook }){
+function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUser }){
 
     const bookconstant = books.map((book) => {
         return <BookListItem key={book.id} book={book} setIsClickedBook={setIsClickedBook} />
@@ -19,7 +19,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook }){
         <div>
         {isClickedBook ? 
         <Route exact path={`${match.url}/:id`} >
-            <BookDetail key = {params} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} />
+            <BookDetail key = {params} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
         </Route> :
         bookconstant} 
          
