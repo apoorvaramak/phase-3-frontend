@@ -1,6 +1,6 @@
 import BookListItem from './BookListItem'
 import BookDetail from './BookDetail'
-import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { Route, useRouteMatch } from 'react-router-dom';
 
 function BookList({ books, setBooks, isClickedBook, setIsClickedBook }){
 
@@ -17,7 +17,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook }){
         <div>
         {isClickedBook ? 
         <Route exact path={`${match.url}/:id`} >
-            <BookDetail books={books} setIsClickedBook={setIsClickedBook} />
+            <BookDetail books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} />
         </Route> :
         bookconstant} 
          

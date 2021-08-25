@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { Route, Switch, useHistory, useParams, Link } from 'react-router-dom';
-import BookDetail from './BookDetail.js'
+// import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function BookListItem({book, setIsClickedBook }){
     // const [showDetails, setShowDetails] = useState(false)

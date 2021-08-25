@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Switch  } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Route  } from 'react-router-dom';
+import { useState } from 'react';
 import NavBar from './Components/NavBar';
 import './App.css';
 import BookContainer from './Components/BookContainer';

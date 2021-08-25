@@ -1,13 +1,34 @@
 import { useState } from 'react';
-import { Route, Switch, useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-function BookDetail({books, setIsClickedBook}){
-    //form set up for reviews no user_id do we want to keep or forge
+function BookDetail({books, setBooks, setIsClickedBook}){
+    //form set up for reviews no user_id do we want to keep or hardcode a user_id?
     const [addReviewFormData, setAddReviewFormData] = useState({
         content: "",
         rating: "",
-        book_id: parseInt(useParams().id)
+        book_id: parseInt(useParams().id),
+        id: null
     })
+   
+    const [isEditReview, setIsEditReview] = useState(false)
+   
+    const id = useParams().id
+
+    const book = books.find(element => element.id === id)
+
+    const reviewMap = book.reviews.map((review) => {
+        return (
+            <div>
+                <p key={review.id}>Review: {review.content} Rating: {review.rating}</p>
+                <button name={review.id} onClick={onEditReviewClick}>Edit Review</button>
+            </div>
+        )
+    })
+
+    function handleClick(){
+        setIsClickedBook(false)
+    }
+
     function manageReviewFormData(e) {
         let key = e.target.name
         let value = e.target.value
@@ -17,34 +38,71 @@ function BookDetail({books, setIsClickedBook}){
         })
     }
 
-    const id = useParams().id
-    // console.log(books)
-    // console.log(id)
-
-    const book = books.find(element => element.id == id)
-
-    const reviewMap = book.reviews.map((review) => {
-        return (<p key={review.id}>Review: {review.content} Rating: {review.rating}</p>)
-    })
-
-    function handleClick(){
-        setIsClickedBook(false)
-    }
-    //working on review add form but need to parse request body and set up endpoint this post does not provide user foreign key
+    //this post and patch do not provide user_id foreign key but otherwise work
+    //for PATCH, splices out old version of review then adds edited version, then to next step for POST splices out old version of BOOK and adds newly reviewed book
     function onSubmit(e){
         e.preventDefault()
-        fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
-            method: "POST",
-            header: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(addReviewFormData)
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
+        // console.log(JSON.stringify(addReviewFormData))
+        if (!isEditReview) {
+            fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
+                method: "POST",
+                header: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify(addReviewFormData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                book.reviews.push(data)
+                let index = books.indexOf(oneBook => oneBook.id === book.id)
+                books.splice(index);
+                setBooks([book, ...books])
+                setAddReviewFormData({   
+                    content: "",
+                    rating: "",
+                    book_id: book.id,
+                    id: null
+                })
+            }) 
+        } else {
+            fetch(`${process.env.REACT_APP_API_URL}/reviews/${addReviewFormData.id}`, {
+                method: "PATCH",
+                header: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify(addReviewFormData)
+            })
+            .then(response => response.json())
+            .then(editedReviewData => {
+                setIsEditReview(false)
+                let reviewId = book.reviews.indexOf(oneReview => oneReview.id === editedReviewData.id)
+                book.reviews.splice(reviewId)
+                book.reviews.push(editedReviewData)
+                let index = books.indexOf(oneBook => oneBook.id === book.id)
+                books.splice(index);
+                setBooks([book, ...books])
+                setAddReviewFormData({   
+                    content: "",
+                    rating: "",
+                    book_id: book.id,
+                    id: null
+                })
+            }) 
+        }
     }
-    
+
+    function onEditReviewClick(e){
+        e.preventDefault()
+        setIsEditReview(true)
+        let id = parseInt(e.target.name)
+        let review = book.reviews.find(rev => rev.id)
+        setAddReviewFormData({
+            ...review,
+            id
+        })
+    }
 
     return(
         <div>
