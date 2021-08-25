@@ -14,7 +14,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
    
     const id = useParams().id
 
-    const book = books.find(element => element.id === id)
+    const book = books.find(element => element.id == id)
 
     const reviewMap = book.reviews.map((review) => {
         return (
@@ -44,6 +44,8 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         e.preventDefault()
         // console.log(JSON.stringify(addReviewFormData))
         if (!isEditReview) {
+            console.log('post')
+            debugger
             fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
                 method: "POST",
                 header: {
@@ -55,8 +57,8 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             .then(response => response.json())
             .then(data => {
                 book.reviews.push(data)
-                let index = books.indexOf(oneBook => oneBook.id === book.id)
-                books.splice(index);
+                let index = books.findIndex(oneBook => oneBook.id === book.id)
+                books.splice(index, 1);
                 setBooks([book, ...books])
                 setAddReviewFormData({   
                     content: "",
@@ -66,6 +68,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
                 })
             }) 
         } else {
+            console.log('patch')
             fetch(`${process.env.REACT_APP_API_URL}/reviews/${addReviewFormData.id}`, {
                 method: "PATCH",
                 header: {
@@ -77,11 +80,11 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             .then(response => response.json())
             .then(editedReviewData => {
                 setIsEditReview(false)
-                let reviewId = book.reviews.indexOf(oneReview => oneReview.id === editedReviewData.id)
-                book.reviews.splice(reviewId)
+                let reviewId = book.reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
+                book.reviews.splice(reviewId, 1)
                 book.reviews.push(editedReviewData)
-                let index = books.indexOf(oneBook => oneBook.id === book.id)
-                books.splice(index);
+                let index = books.findIndex(oneBook => oneBook.id === book.id)
+                books.splice(index, 1);
                 setBooks([book, ...books])
                 setAddReviewFormData({   
                     content: "",
@@ -97,7 +100,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         e.preventDefault()
         setIsEditReview(true)
         let id = parseInt(e.target.name)
-        let review = book.reviews.find(rev => rev.id)
+        let review = book.reviews.find(rev => rev.id == id)
         setAddReviewFormData({
             ...review,
             id

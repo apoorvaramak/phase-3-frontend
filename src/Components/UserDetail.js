@@ -1,4 +1,4 @@
-import { Route, Switch, useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 function UserDetail({users, setIsClickedUser }){
     console.log("hi from UserDetail", users)

@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { useParams, useHistory, Link, Route } from 'react-router-dom';
-import UserDetail from './UserDetail'
+// import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function UserListItem({ user, users, setIsClickedUser }){
-    const params = useParams()
-    const reviewMap = user.reviews.map((review) => {
-        return (<p>Book: {review.book_id} Review: {review.content} Rating: {review.rating}</p>)
-    })
+    // const params = useParams()
+
+    // const reviewMap = user.reviews.map((review) => {
+    //     return (<p>Book: {review.book_id} Review: {review.content} Rating: {review.rating}</p>)
+    // })
 
     // let history = useHistory();
 

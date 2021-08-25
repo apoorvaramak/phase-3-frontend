@@ -1,7 +1,7 @@
 import UserListItem from './UserListItem';
 import { Route, useRouteMatch, useParams } from 'react-router-dom'
 import UserDetail from './UserDetail'
-import { useState } from 'react' 
+// import { useState } from 'react' 
 
 function UserList({ users, setIsClickedUser, isClickedUser }){
 

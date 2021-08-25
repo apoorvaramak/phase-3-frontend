@@ -11,13 +11,14 @@ function BookListItem({book, setIsClickedBook }){
     //     history.push(`/books/${book.id}`)        
     // }
 
-    function handleClick(){
-        setIsClickedBook(true)
-    }
     // const reviewMap = book.reviews.map((review) => {
     //     return (<p key={review.id}>Review: {review.content} Rating: {review.rating}</p>)
     // })
     // const slug = `/books/${book.id}`
+
+    function handleClick(){
+        setIsClickedBook(true)
+    }
     
     return(
         <div>
