@@ -42,7 +42,6 @@ function BookDetail({books, setBooks, setIsClickedBook}){
     //for PATCH, splices out old version of review then adds edited version, then to next step for POST splices out old version of BOOK and adds newly reviewed book
     function onSubmit(e){
         e.preventDefault()
-        // console.log(JSON.stringify(addReviewFormData))
         if (!isEditReview) {
             console.log('post')
             debugger
@@ -58,7 +57,6 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             .then(data => {
                 book.reviews.push(data)
                 let index = books.findIndex(oneBook => oneBook.id === book.id)
-                books.splice(index, 1);
                 setBooks([book, ...books])
                 setAddReviewFormData({   
                     content: "",
@@ -81,10 +79,9 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             .then(editedReviewData => {
                 setIsEditReview(false)
                 let reviewId = book.reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
-                book.reviews.splice(reviewId, 1)
-                book.reviews.push(editedReviewData)
+                book.reviews[reviewId] = editedReviewData
                 let index = books.findIndex(oneBook => oneBook.id === book.id)
-                books.splice(index, 1);
+                books[index] = book
                 setBooks([book, ...books])
                 setAddReviewFormData({   
                     content: "",

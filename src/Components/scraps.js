@@ -62,3 +62,13 @@ BookDetail goBack function with useHistory, in UserDetail just /users
 // function goBack(){
 //   history.push(`/books`)        
 // }
+
+Scraps from the review post and patch
+from post
+// books.splice(index, 1); 
+from patch          
+// books.splice(index, 1);      
+// book.reviews.splice(reviewId, 1)
+// book.reviews.push(editedReviewData)
+from right under the onSubmit to see what data comes through
+// console.log(JSON.stringify(addReviewFormData))
