@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-// import { useRouteMatch } from 'react-router-dom'
 import BookList from './BookList'
-
+import AddBookForm from './AddBookForm';
+import { Route } from 'react-router-dom'
 
 
 function BookContainer({ isClickedBook, setIsClickedBook}){
@@ -20,9 +20,13 @@ function BookContainer({ isClickedBook, setIsClickedBook}){
     // const match = useRouteMatch()
     return(
         <div>
-            <BookList books={books} setBooks={setBooks}  setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} />
+            <Route path="/books/add">
+                <AddBookForm />
+            </Route>
+            <BookList books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} />
         </div>
     )
 }
+
 
 export default BookContainer;

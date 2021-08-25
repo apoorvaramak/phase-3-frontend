@@ -80,7 +80,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             .then(response => response.json())
             .then(data => {
                 // reviews.push(data)
-                let index = books.findIndex(oneBook => oneBook.id === book.id)
+                // let index = books.findIndex(oneBook => oneBook.id === book.id)
                 setReviews([data, ...reviews])
                 setAddReviewFormData({   
                     content: "",
@@ -104,8 +104,8 @@ function BookDetail({books, setBooks, setIsClickedBook}){
                 setIsEditReview(false)
                 let reviewId = reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
                 reviews[reviewId] = editedReviewData
-                let index = books.findIndex(oneBook => oneBook.id === book.id)
-                books[index] = book
+                // let index = books.findIndex(oneBook => oneBook.id === book.id)
+                // books[index] = book
                 setReviews(reviews)
                 setAddReviewFormData({   
                     content: "",
@@ -113,7 +113,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
                     book_id: book.id,
                     id: null
                 })
-            }) 
+            })
         }
     }
 
