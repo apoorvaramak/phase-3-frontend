@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 function BookDetail({books, setBooks, setIsClickedBook}){
@@ -9,24 +9,49 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         book_id: parseInt(useParams().id),
         id: null
     })
-   
-    const [isEditReview, setIsEditReview] = useState(false)
-   
-    const id = useParams().id
 
+    const id = useParams().id
     const book = books.find(element => element.id == id)
 
-    const reviewMap = book.reviews.map((review) => {
+    const [isEditReview, setIsEditReview] = useState(false)
+    const [reviews, setReviews] = useState(book.reviews)
+
+    const reviewMap = reviews.map((review) => {
         return (
-            <div>
+            <div key = {review.id}>
                 <p key={review.id}>Review: {review.content} Rating: {review.rating}</p>
                 <button name={review.id} onClick={onEditReviewClick}>Edit Review</button>
+                <button name ={review.id} onClick ={deleteReview}>Delete Review</button>
             </div>
         )
     })
 
+
     function handleClick(){
         setIsClickedBook(false)
+    }
+
+    function deleteReview(event){
+        event.preventDefault()
+        console.log(event)
+        fetch(`${process.env.REACT_APP_API_URL}/reviews/${event.target.name}`, {
+            method: 'DELETE',
+            headers: { 
+                Accept: 'application/json',
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            const deleteBooks = reviews.filter((review) => review.id !== data.id)
+            console.log(deleteBooks)
+            setReviews(deleteBooks)
+        })
+        // const deleteBooks = book.reviews.filter((review) => review.id !== event.target.name)
+        // let index = books.findIndex(oneBook => oneBook.id === book.id)
+        // .then(response => response.json())
+        // .then(data => books.reviews.filter((review) => review.id !== data.id))
     }
 
     function manageReviewFormData(e) {
@@ -44,7 +69,6 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         e.preventDefault()
         if (!isEditReview) {
             console.log('post')
-            debugger
             fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
                 method: "POST",
                 header: {
@@ -55,9 +79,9 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             })
             .then(response => response.json())
             .then(data => {
-                book.reviews.push(data)
+                // reviews.push(data)
                 let index = books.findIndex(oneBook => oneBook.id === book.id)
-                setBooks([book, ...books])
+                setReviews([data, ...reviews])
                 setAddReviewFormData({   
                     content: "",
                     rating: "",
@@ -78,11 +102,11 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             .then(response => response.json())
             .then(editedReviewData => {
                 setIsEditReview(false)
-                let reviewId = book.reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
-                book.reviews[reviewId] = editedReviewData
+                let reviewId = reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
+                reviews[reviewId] = editedReviewData
                 let index = books.findIndex(oneBook => oneBook.id === book.id)
                 books[index] = book
-                setBooks([book, ...books])
+                setReviews(reviews)
                 setAddReviewFormData({   
                     content: "",
                     rating: "",
@@ -97,7 +121,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         e.preventDefault()
         setIsEditReview(true)
         let id = parseInt(e.target.name)
-        let review = book.reviews.find(rev => rev.id == id)
+        let review = reviews.find(rev => rev.id == id)
         setAddReviewFormData({
             ...review,
             id
