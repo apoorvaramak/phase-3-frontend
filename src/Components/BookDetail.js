@@ -18,14 +18,14 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
     const [isEditReview, setIsEditReview] = useState(false)
     const [reviews, setReviews] = useState(book.reviews)
 
+    console.log("Before reviewsMap:", reviews)
     const reviewMap = reviews.map((review) => {
-        // console.log(review.user.id)
         return (
-            !reviews.length ? (<div>Loading...</div>) : (<div key = {review.id}>
-                <p>Review: {review.content} Rating: {review.rating}</p>
-                {review.user.id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
-                {review.user.id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
-            </div> )
+            <div key = {review.id}>
+            <p>Review: {review.content} Rating: {review.rating}</p>
+            {review.user_id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
+            {review.user_id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
+            </div> 
         )
     })
 
@@ -71,8 +71,10 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
         e.preventDefault()
         if (!isEditReview) {
             console.log('post', addReviewFormData)
-            const aaaaWork = [addReviewFormData, ...reviews]
-            setReviews(aaaaWork)
+            // const aaaaWork = [addReviewFormData, ...reviews]
+            // console.log("aaaaWork", aaaaWork)
+            // setReviews(aaaaWork)
+            // console.log("After setReviews", reviews)
             fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
                 method: "POST",
                 header: {
@@ -88,7 +90,7 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
                 // let index = books.findIndex(oneBook => oneBook.id === book.id)
                 // const aaaaHelp = [data, ...reviews]
                 // console.log("aaaaHelp", aaaaHelp)
-                // setReviews(aaaaHelp)
+                setReviews(previousReviews => [data, ...previousReviews])
                 console.log("did we get this far? Reviews:", reviews)
                 setAddReviewFormData({  
                     content: "",
