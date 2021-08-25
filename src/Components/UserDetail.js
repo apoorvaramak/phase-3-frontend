@@ -1,4 +1,5 @@
-import { Route, Switch, useHistory, useParams, Link } from 'react-router-dom';
+import { Route, Switch, useParams, Link } from 'react-router-dom';
+
 function UserDetail({users, setIsClickedUser }){
     console.log("hi from UserDetail", users)
 
@@ -7,16 +8,11 @@ function UserDetail({users, setIsClickedUser }){
 
     const user = users.find(element => element.id == id)
     console.log(user)
-    let history = useHistory();
 
-    // function goBack(){
-    //     history.push(`/users`)        
-    // }
-
-    // const reviewMap = user.reviews.map((review) => {
-    //     return (<p key={review.id}>Book: {review.book.title} Review: {review.content} Rating: {review.rating}</p>)
-    // })
-    //this works to show all info we want, but we want the "detail-div" to be its own page with its own url - ?params? 
+    const reviewMap = user.reviews.map((review) => {
+        return (<p key={review.id}>Book: {review.book.title} Review: {review.content} Rating: {review.rating}</p>)
+    })
+    
     function handleClick(){
         setIsClickedUser(false)
     }
@@ -27,7 +23,7 @@ function UserDetail({users, setIsClickedUser }){
                 <p>Birthday: {user.birthday}</p>
                 <p>XP: {user.xp}</p>
                 <p>Level: {Math.ceil(user.xp/300)}</p>
-                {/* <div>{reviewMap}</div> */}
+                <div>{reviewMap}</div>
                 <Link to="/users" onClick={handleClick}>Go back</Link>
             </div>
         </div>

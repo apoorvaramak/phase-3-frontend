@@ -3,7 +3,7 @@ import { Route, Switch, useHistory, useParams, Link } from 'react-router-dom';
 import BookDetail from './BookDetail.js'
 
 function BookListItem({book, setIsClickedBook }){
-    const [showDetails, setShowDetails] = useState(false)
+    // const [showDetails, setShowDetails] = useState(false)
 
     // let history = useHistory();
 
@@ -19,7 +19,7 @@ function BookListItem({book, setIsClickedBook }){
     //     return (<p key={review.id}>Review: {review.content} Rating: {review.rating}</p>)
     // })
     // const slug = `/books/${book.id}`
-    //this works to show all info we want, but we want the "detail-div" to be its own page with its own url - ?params? 
+    
     return(
         <div>
             <div className="list-div">

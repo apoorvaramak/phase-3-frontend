@@ -16,7 +16,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook }){
     return  (
         <div>
         {isClickedBook ? 
-        <Route exact path={`${match.url}/:id`}>
+        <Route exact path={`${match.url}/:id`} >
             <BookDetail books={books} setIsClickedBook={setIsClickedBook} />
         </Route> :
         bookconstant} 

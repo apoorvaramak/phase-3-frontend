@@ -1,4 +1,4 @@
-import BookContainer from "./BookContainer";
+import { useHistory } from "react-router-dom"
 
 {/* <Route exact path="/books/:id/edit">
                 <EditBookInfo 
@@ -6,8 +6,6 @@ import BookContainer from "./BookContainer";
                 book={books.find((book) => book.id === parseInt(match.params.id))}
                 setBooks={setBooks} />
             </Route> */}
-
-
 
 
 BookContainer
@@ -29,3 +27,38 @@ BookContainer
             </Route> */}
         // </Switch>
     
+
+App.js fetch with async/await
+  // const [users, setUsers] = useState([])
+  //fetch based on dogwalk trying to get the fetch to wait for load (will get user on second pause press)
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     const res = await fetch(`${process.env.REACT_APP_API_URL}/users`, {
+  //       headers: { Accept: 'application/json' }
+  //     });
+  //     const parsedBody = await res.json();
+  //     setUsers(parsedBody);
+  //   }
+  //   fetchUsers();
+  // }, []);
+  app.js other planned routes not functioning now
+            {/* <Route
+            exact path="/users/:id"
+            render={({ match }) => 
+            {let user = users.find((user) => {
+              return user.id === parseInt(match.params.id)})
+              console.log(users)
+            return ( 
+              <UserListItem
+                user={user}
+                // {users.find((user) => {
+                //   return user.id === parseInt(match.params.id)})}
+              />
+            )}
+            }/> */}
+
+BookDetail goBack function with useHistory, in UserDetail just /users
+// let history = useHistory();
+// function goBack(){
+//   history.push(`/books`)        
+// }
