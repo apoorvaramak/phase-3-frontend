@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-// import { useRouteMatch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import BookList from './BookList'
+import AddBookForm from './AddBookForm';
 
 
 
@@ -17,9 +18,12 @@ function BookContainer({ isClickedBook, setIsClickedBook, currentUser }){
         .then(data => setBooks(data))
     }, [])
 
-    // const match = useRouteMatch()
+    
     return(
         <div>
+            <Route path="/books/add">
+                <AddBookForm books={books} setBooks={setBooks}/>
+            </Route>
             <BookList books={books} setBooks={setBooks}  setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} />
         </div>
     )

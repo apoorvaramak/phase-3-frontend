@@ -20,6 +20,7 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
 
     console.log("Before reviewsMap:", reviews)
     const reviewMap = reviews.map((review) => {
+        console.log(review)
         let num = review.rating;
         let stars = '';
         while(num > 0){
@@ -28,7 +29,7 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
         }
         return (
             <div className = "reviews" key = {review.id}>
-            <p>Review: {review.content} Rating: {stars}</p>
+            <p>Rating from: {review.user_id} Review: {review.content} Rating: {stars}</p>
             {review.user_id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
             {review.user_id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
             </div> 
@@ -77,6 +78,7 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
         e.preventDefault()
         if (!isEditReview) {
             console.log('post', addReviewFormData)
+            console.log(currentUser.id)
             // const aaaaWork = [addReviewFormData, ...reviews]
             // console.log("aaaaWork", aaaaWork)
             // setReviews(aaaaWork)

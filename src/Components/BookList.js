@@ -1,6 +1,6 @@
 import BookListItem from './BookListItem'
 import BookDetail from './BookDetail'
-import { Route, useParams, useRouteMatch } from 'react-router-dom';
+import { Route, Link, useParams, useRouteMatch } from 'react-router-dom';
 
 function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUser }){
 
@@ -15,14 +15,20 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUse
 
     const params = useParams()
 
+    function addBookClick(e){
+        e.stopPropagation()
+    }
+
     return  (
         <div className ="book-list">
-        {isClickedBook ? 
-        <Route exact path={`${match.url}/:id`} >
-            <BookDetail key = {params.id} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
-        </Route> :
-        bookconstant} 
-         
+            {isClickedBook ? 
+            <Route exact path={`${match.url}/:id`} >
+                <BookDetail key = {params.id} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
+            </Route> :
+            <div>
+                <Link to="/books/add" onClick={addBookClick} >Add New Book</Link>
+                {bookconstant} 
+            </div>}
         </div>
     )
 
