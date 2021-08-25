@@ -36,7 +36,7 @@ function App() {
       <Route path="/home">
         <HomePage users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
       </Route>
-      <Redirect to="/home"/>
+      {/* <Redirect to="/home"/> */}
     </div>
   );
 }

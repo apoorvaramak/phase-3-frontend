@@ -19,7 +19,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUse
         <div>
         {isClickedBook ? 
         <Route exact path={`${match.url}/:id`} >
-            <BookDetail key = {params} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
+            <BookDetail key = {params.id} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
         </Route> :
         bookconstant} 
          

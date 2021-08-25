@@ -19,14 +19,13 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
     const [reviews, setReviews] = useState(book.reviews)
 
     const reviewMap = reviews.map((review) => {
-        console.log(review.user.id)
+        // console.log(review.user.id)
         return (
-            <div key = {review.id}>
-                {/* <p key={review.id}>User: {review.user.name} Review: {review.content} Rating: {review.rating}</p> */}
+            !reviews.length ? (<div>Loading...</div>) : (<div key = {review.id}>
                 <p>Review: {review.content} Rating: {review.rating}</p>
                 {review.user.id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
                 {review.user.id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
-            </div>
+            </div> )
         )
     })
 
@@ -67,12 +66,13 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
         })
     }
 
-    //this post and patch do not provide user_id foreign key but otherwise work
     //for PATCH, splices out old version of review then adds edited version, then to next step for POST splices out old version of BOOK and adds newly reviewed book
     function onSubmit(e){
         e.preventDefault()
         if (!isEditReview) {
             console.log('post', addReviewFormData)
+            const aaaaWork = [addReviewFormData, ...reviews]
+            setReviews(aaaaWork)
             fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
                 method: "POST",
                 header: {
@@ -86,7 +86,9 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
                 console.log('AddReview response data:', data)
                 // reviews.push(data)
                 // let index = books.findIndex(oneBook => oneBook.id === book.id)
-                setReviews([data, ...reviews])
+                // const aaaaHelp = [data, ...reviews]
+                // console.log("aaaaHelp", aaaaHelp)
+                // setReviews(aaaaHelp)
                 console.log("did we get this far? Reviews:", reviews)
                 setAddReviewFormData({  
                     content: "",
