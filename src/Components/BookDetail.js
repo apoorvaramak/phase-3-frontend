@@ -17,9 +17,15 @@ function BookDetail({books, setBooks, setIsClickedBook}){
     const [reviews, setReviews] = useState(book.reviews)
 
     const reviewMap = reviews.map((review) => {
+        let num = review.rating;
+        let stars = '';
+        while(num > 0){
+            stars += "⭐";
+            num -= 1;
+        }
         return (
-            <div key = {review.id}>
-                <p key={review.id}>Review: {review.content} Rating: {review.rating}</p>
+            <div className = "reviews" key = {review.id}>
+                <p key={review.id}><b>Review:</b> {review.content} <b>Rating:</b> {stars}</p>
                 <button name={review.id} onClick={onEditReviewClick}>Edit Review</button>
                 <button name ={review.id} onClick ={deleteReview}>Delete Review</button>
             </div>
@@ -131,21 +137,25 @@ function BookDetail({books, setBooks, setIsClickedBook}){
     return(
         <div>
             <div className="detail-div">
-                <p>Title: {book.title}</p>
-                <p>Author: {book.author}</p>
-                <p>Publisher: {book.publisher}</p>
-                <p>Genre: {book.genre}</p>
-                <p>Page Count: {book.page_count}</p>
+                <p><b>Title:</b> {book.title}</p>
+                <p><b>Author:</b> {book.author}</p>
+                <p><b>Publisher:</b> {book.publisher}</p>
+                <p><b>Genre:</b> {book.genre}</p>
+                <p><b>Page Count:</b> {book.page_count}</p>
                 <div>{reviewMap}</div>
                 <h3>Add a Review</h3>
-                <form onSubmit={onSubmit}>
-                    <label htmlFor="rating">Rating(1-5): </label>
-                    <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" name="rating" min="1" max="5" placeholder="1-5"/>
-                    <label htmlFor="content">Review:</label>
-                    <input onChange={manageReviewFormData} value={addReviewFormData.content} type="text" name="content" placeholder="add review..."/>
-                    <button type="submit">Submit</button>
-                </form>
+                <div className = "form-div">
+                    <form onSubmit={onSubmit}>
+                        <label className="review" htmlFor="rating">Rating(1-5): </label>
+                        <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" name="rating" min="1" max="5" placeholder="1-5"/>
+                        <label className = "review" htmlFor="content">Review:</label>
+                        <input onChange={manageReviewFormData} value={addReviewFormData.content} type="text" name="content" placeholder="add review..."/>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <button className = "back-button">
                 <Link to="/books" onClick={handleClick} >Go back</Link>
+                </button>
             </div>
         </div>
     )

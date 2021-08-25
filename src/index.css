@@ -15,7 +15,44 @@ code {
 
 /*Review Details Upon Click*/
 .detail-div {
-  border: 1px solid black
+  background-color: #fffcf5;
+  border: 1px solid black;
+  padding-bottom: 20px;
+  margin: 120px;
+}
+
+.form-div {
+  background-color: #d8cfea;
+  margin-right: 150px; 
+  margin-left: 150px;
+  border: 1px solid #7e7cfc;
+  padding: 50px;
+}
+
+.back-button {
+  margin-top: 30px;
+  font-weight: 500;
+  padding: 12px 20px;
+  background-color: #7e7cfc;
+  border-radius: 4px;
+}
+
+.rating{
+  margin-right: 10px; 
+}
+
+.review{
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+.reviews{
+  background-color: #d8cfea;
+  border: 1px solid #7e7cfc;
+  padding-bottom: 20px;
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-bottom: 10px;
 }
 
 .list-div {
@@ -51,3 +88,16 @@ code {
   color: black;
   background-color: #cfcff5;
 } 
+
+.book-list{
+  margin-left: 33%;
+  margin-right: 33%;
+  display: flex;
+  flex-flow: column wrap;  
+
+}
+
+.list-div{
+  background-color: #fffcf5;
+  padding: 25px; 
+}

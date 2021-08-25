@@ -16,7 +16,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook }){
     const params = useParams()
 
     return  (
-        <div>
+        <div className ="book-list">
         {isClickedBook ? 
         <Route exact path={`${match.url}/:id`} >
             <BookDetail key = {params} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} />
