@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-function BookDetail({books, setBooks, setIsClickedBook}){
+function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
     //form set up for reviews no user_id do we want to keep or hardcode a user_id?
+    // console.log("BookDetail", currentUser.id)
     const [addReviewFormData, setAddReviewFormData] = useState({
         content: "",
         rating: "",
         book_id: parseInt(useParams().id),
+        user_id: parseInt(currentUser.id),
         id: null
     })
 
@@ -16,6 +18,7 @@ function BookDetail({books, setBooks, setIsClickedBook}){
     const [isEditReview, setIsEditReview] = useState(false)
     const [reviews, setReviews] = useState(book.reviews)
 
+    console.log("Before reviewsMap:", reviews)
     const reviewMap = reviews.map((review) => {
         let num = review.rating;
         let stars = '';
@@ -25,10 +28,10 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         }
         return (
             <div className = "reviews" key = {review.id}>
-                <p key={review.id}><b>Review:</b> {review.content} <b>Rating:</b> {stars}</p>
-                <button name={review.id} onClick={onEditReviewClick}>Edit Review</button>
-                <button name ={review.id} onClick ={deleteReview}>Delete Review</button>
-            </div>
+            <p>Review: {review.content} Rating: {stars}</p>
+            {review.user_id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
+            {review.user_id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
+            </div> 
         )
     })
 
@@ -65,16 +68,19 @@ function BookDetail({books, setBooks, setIsClickedBook}){
         let value = e.target.value
         setAddReviewFormData({
             ...addReviewFormData,
-            [key]: value
+            [key]: value,
         })
     }
 
-    //this post and patch do not provide user_id foreign key but otherwise work
     //for PATCH, splices out old version of review then adds edited version, then to next step for POST splices out old version of BOOK and adds newly reviewed book
     function onSubmit(e){
         e.preventDefault()
         if (!isEditReview) {
-            console.log('post')
+            console.log('post', addReviewFormData)
+            // const aaaaWork = [addReviewFormData, ...reviews]
+            // console.log("aaaaWork", aaaaWork)
+            // setReviews(aaaaWork)
+            // console.log("After setReviews", reviews)
             fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
                 method: "POST",
                 header: {
@@ -85,13 +91,18 @@ function BookDetail({books, setBooks, setIsClickedBook}){
             })
             .then(response => response.json())
             .then(data => {
+                console.log('AddReview response data:', data)
                 // reviews.push(data)
-                let index = books.findIndex(oneBook => oneBook.id === book.id)
-                setReviews([data, ...reviews])
-                setAddReviewFormData({   
+                // let index = books.findIndex(oneBook => oneBook.id === book.id)
+                // const aaaaHelp = [data, ...reviews]
+                // console.log("aaaaHelp", aaaaHelp)
+                setReviews(previousReviews => [data, ...previousReviews])
+                console.log("did we get this far? Reviews:", reviews)
+                setAddReviewFormData({  
                     content: "",
                     rating: "",
                     book_id: book.id,
+                    user_id: currentUser.id,
                     id: null
                 })
             }) 
@@ -110,13 +121,14 @@ function BookDetail({books, setBooks, setIsClickedBook}){
                 setIsEditReview(false)
                 let reviewId = reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
                 reviews[reviewId] = editedReviewData
-                let index = books.findIndex(oneBook => oneBook.id === book.id)
-                books[index] = book
+                // let index = books.findIndex(oneBook => oneBook.id === book.id)
+                // books[index] = book
                 setReviews(reviews)
                 setAddReviewFormData({   
                     content: "",
                     rating: "",
                     book_id: book.id,
+                    user_id: currentUser.id,
                     id: null
                 })
             }) 
@@ -144,16 +156,16 @@ function BookDetail({books, setBooks, setIsClickedBook}){
                 <p><b>Page Count:</b> {book.page_count}</p>
                 <div>{reviewMap}</div>
                 <h3>Add a Review</h3>
-                <div className = "form-div">
-                    <form onSubmit={onSubmit}>
-                        <label className="review" htmlFor="rating">Rating(1-5): </label>
-                        <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" name="rating" min="1" max="5" placeholder="1-5"/>
-                        <label className = "review" htmlFor="content">Review:</label>
-                        <input onChange={manageReviewFormData} value={addReviewFormData.content} type="text" name="content" placeholder="add review..."/>
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
-                <button className = "back-button">
+                {Object.keys(currentUser).length === 0 ?
+                    <h3>Please select a user</h3> :
+                    <form className = "form-div" onSubmit={onSubmit}>
+                    <label htmlFor="rating">Rating(1-5): </label>
+                    <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" name="rating" min="1" max="5" placeholder="1-5"/>
+                    <label htmlFor="content">Review:</label>
+                    <input onChange={manageReviewFormData} value={addReviewFormData.content} type="text" name="content" placeholder="add review..."/>
+                    <button type="submit">Submit</button>
+                </form>}
+                <button>
                 <Link to="/books" onClick={handleClick} >Go back</Link>
                 </button>
             </div>

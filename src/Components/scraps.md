@@ -72,3 +72,7 @@ from patch
 // book.reviews.push(editedReviewData)
 from right under the onSubmit to see what data comes through
 // console.log(JSON.stringify(addReviewFormData))
+
+
+BookDetail 25ish
+                {/* <p key={review.id}>User: {review.user.name} Review: {review.content} Rating: {review.rating}</p> */}
