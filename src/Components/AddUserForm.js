@@ -62,7 +62,7 @@ function AddUserForm({ users, setUsers, setCurrentUser }){
             {/* <form className="form-div"> */}
 				<h2>Add a New User</h2>
                 <div>
-                    <label htmlFor="title">Name: </label>
+                    <label htmlFor="name">Name: </label>
                     <input onChange={manageAddFormData} value={addUserFormData.name}
                     type="text" id="name" name="name" placeholder="name"/>
                 </div>
@@ -77,7 +77,7 @@ function AddUserForm({ users, setUsers, setCurrentUser }){
                     type="text" id="pfp" name="pfp" placeholder="add a url..."/>
                 </div>
                 <div>
-                    <button type="submit" className="add-User-button">Add New User</button>
+                    <button type="submit" className="submit-input">Add New User</button>
                 </div>
             </form>
         </div>
