@@ -101,3 +101,19 @@ code {
   background-color: #fffcf5;
   padding: 25px; 
 }
+
+.homepage-reviews{
+  display: flex;
+  justify-content: center; 
+}
+
+.books-read{
+  display: flex;
+  flex-flow: column wrap;
+  padding: 50px;
+}
+
+.pfp{
+  margin-right: 50px; 
+}
+
