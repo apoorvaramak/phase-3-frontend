@@ -20,12 +20,12 @@ function CurrentUserDropdown({ users, currentUser, setCurrentUser }) {
 	return (
 		<Fragment>
 			{Object.keys(currentUser).length > 0 ?
-				<select onChange={handleChange} >
+				<select onChange={handleChange} defaultValue={currentUser.id}>
 					{userOptionsYes}
 				</select>
 			:
-				<select onChange={handleChange} >
-					<option value="" selected disabled hidden>please select a user</option>
+				<select onChange={handleChange} defaultValue="" >
+					<option value="" disabled hidden>please select a user</option>
 					{userOptionsNo}
 				</select>
 			}

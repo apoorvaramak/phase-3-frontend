@@ -1,5 +1,5 @@
 import CurrentUserDropdown from './CurrentUserDropdown';
-import {useState} from 'react'
+import { useState, Fragment } from 'react'
 import AddUserForm from './AddUserForm';
 
 function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
@@ -49,23 +49,9 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		setUsers([newUser, ...users])
 	}
 
-	if (Object.keys(currentUser).length === 0) {
-		return(
-			<div>
-				<h1>Welcome!</h1>
-	            <form className="form-div">
-					<h2>Login As:</h2>
-					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
-				</form>
-				{/* <h1>Or add a new user:</h1> */}
-				<h2></h2>
-				<div>
-					<AddUserForm passSetUsers={passSetUsers} setCurrentUser={setCurrentUser} />
-				</div>
-			</div>
-		)
-	} else { 
-		const books = currentUser.reviews.map((review) => {
+	let books = <h3>Loading...</h3>
+	if (Object.keys(currentUser).length > 0) {
+		books = currentUser.reviews.map((review) => {
 			const date = parseInt(review.updated_at.slice(0, 10))
 			const timeNow = new Date().getTime() / 1000
 			const timeDiff = parseInt((timeNow - review.updated_at))
@@ -87,15 +73,24 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 					return(`${timeDisplayDays} days ago`)
 				}
 			}
-			return (
-				<div className = "the-reviews" key = {review.id}>
-					<h4><i>{review.book.title}</i> by {review.book.author}</h4>
-					<p><b>Review:</b> {review.content}</p>
-					<p style={{fontSize: 10}}>({timeToDisplay})</p>
-				</div>
-			)
 		})
-		return(
+	}
+
+	return(
+		<Fragment>
+			{Object.keys(currentUser).length === 0 ?
+			<div>
+				<h1>Welcome!</h1>
+	            <form className="form-div">
+					<h2>Login As:</h2>
+					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+				</form>
+				<h2></h2>
+				<div>
+					<AddUserForm passSetUsers={passSetUsers} setCurrentUser={setCurrentUser} />
+				</div>
+			</div>
+			:
 			<div>
 				<h1>Welcome, {currentUser.name}!</h1>
 				<div className = "homepage-reviews">
@@ -120,8 +115,10 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
 				</form>
 			</div>
-		)
-	}
+			}
+		</Fragment>
+	)
 }
+
 
 export default HomePage
