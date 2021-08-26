@@ -1,6 +1,7 @@
 import CurrentUserDropdown from './CurrentUserDropdown';
 import { useState, Fragment } from 'react'
 import AddUserForm from './AddUserForm';
+import UserBookList from './UserBookList';
 
 function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 
@@ -49,32 +50,6 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		setUsers([newUser, ...users])
 	}
 
-	let books = <h3>Loading...</h3>
-	if (Object.keys(currentUser).length > 0) {
-		books = currentUser.reviews.map((review) => {
-			const date = parseInt(review.updated_at.slice(0, 10))
-			const timeNow = new Date().getTime() / 1000
-			const timeDiff = parseInt((timeNow - review.updated_at))
-			const timeDisplayHours = parseInt(timeDiff/3600)
-			const timeDisplayDays = parseInt(timeDiff/(3600 * 24))
-
-			console.log(review.updated_at)
-
-			const timeToDisplay = () => {
-				if (timeDiff < 3600) {
-					return('just now')
-				} else if (timeDiff < 7200) {
-					return(`${timeDisplayHours} hour ago`)
-				} else if (timeDiff < 86400) {
-					return(`${timeDisplayHours} hours ago`)
-				} else if (timeDiff < 172800) {
-					return(`${timeDisplayDays} day ago`)
-				} else {
-					return(`${timeDisplayDays} days ago`)
-				}
-			}
-		})
-	}
 
 	return(
 		<Fragment>
@@ -107,7 +82,8 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 					</div>
 					<div className = "books-read">
 						<h3>Books I've Read</h3>
-						{books}
+						<UserBookList currentUser={currentUser} />
+						{/* {books} */}
 					</div>
 				</div>
 				<form className="form-div">
@@ -119,6 +95,5 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		</Fragment>
 	)
 }
-
 
 export default HomePage
