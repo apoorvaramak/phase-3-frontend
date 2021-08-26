@@ -3,7 +3,7 @@ import {useState} from 'react'
 import AddUserForm from './AddUserForm';
 
 function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
-	console.log(currentUser)
+
 	const [pfp, setPfp] = useState("")
 
 	const handleSubmit = (e) => {
@@ -45,6 +45,10 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		// setCurrentUser(updatedUser)
 	}
 
+	function passSetUsers(newUser) {
+		setUsers([newUser, ...users])
+	}
+
 	if (Object.keys(currentUser).length === 0) {
 		return(
 			<div>
@@ -56,7 +60,7 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 				{/* <h1>Or add a new user:</h1> */}
 				<h2></h2>
 				<div>
-					<AddUserForm users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />
+					<AddUserForm passSetUsers={passSetUsers} setCurrentUser={setCurrentUser} />
 				</div>
 			</div>
 		)
