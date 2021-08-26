@@ -1,6 +1,6 @@
-import { Fragment } from "react"
+import { Fragment, useState } from "react";
 import CurrentUserDropdown from './CurrentUserDropdown';
-import {useState} from 'react'
+
 
 function HomePage({ users, currentUser, setCurrentUser }) {
 	// const [chosenUser, setChosenUser] = useState({})
@@ -56,9 +56,7 @@ function HomePage({ users, currentUser, setCurrentUser }) {
 			})
 		}).then(response => response.json())
 		.then(data => updatePfp(data))
-
 		// setCurrentUser(updatedUser)
-
 	}
 	// console.log(currentUser)
 
@@ -71,7 +69,7 @@ function HomePage({ users, currentUser, setCurrentUser }) {
 		)
 	} else { 
 		const books = currentUser.reviews.map((review) => {
-			return (<p key = {review.id}>{review.book.title} by {review.book.author}</p>)
+			return (<p key = {review.id} className="homepage-books">{review.book.title} by {review.book.author}</p>)
 		})
 		return(
 			<div>
@@ -83,9 +81,11 @@ function HomePage({ users, currentUser, setCurrentUser }) {
 					<form onSubmit={handleSubmit}>
 						<input type="text" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
 						<input className="submit-input" type="submit" value="Submit" />
-						<h3>Books I've Read</h3>
 					</form>
-					{books}
+					<div className="reviews">
+						<h3>Books I've Read</h3>
+						{books}
+					</div>
 				</div>
 			</div>
 		)

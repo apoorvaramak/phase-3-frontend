@@ -102,13 +102,26 @@ code {
   padding: 25px; 
 }
 
-/*Link class text color must be done inline styling*/
+/* Inputs and Links */ /*663366 is color of clicked link*/
 .link-button-class{
-  background-color: #cfcff5;	
+  /*Link class text color and text decoration must be done inline styling for some reason*/	
+  background-color: #cfcff5;
+  border:  1px solid #7e7cfc;
+  padding: 3px 14px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;	
+  cursor: pointer;
 }
-/*663366*/
-/* Submit Inputs */
+
 .submit-input{
   background-color: #cfcff5;
-  color: #6A5ACD	
+  color: #6A5ACD;
+  border:  1px solid #7e7cfc;
+  padding: 3px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;	
+  cursor: pointer;
 }
