@@ -75,10 +75,6 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		return(
 			<div>
 				<h1>Welcome, {currentUser.name}!</h1>
-				<form className="form-div">
-					<h2>Select a Different User</h2>
-					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
-				</form>
 				<div className = "homepage-reviews">
 					<div className = "pfp">
 					<img src = {currentUser.pfp} alt="profile-pic"  width="150px" height="150px"></img>
@@ -92,6 +88,10 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 						{books}
 					</div>
 				</div>
+				<form className="form-div">
+					<h2>Select a Different User</h2>
+					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+				</form>
 			</div>
 		)
 	}

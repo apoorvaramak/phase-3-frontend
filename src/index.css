@@ -102,7 +102,6 @@ code {
   padding: 25px; 
 }
 
-<<<<<<< HEAD
 .homepage-reviews{
   display: flex;
   justify-content: center; 
@@ -123,7 +122,7 @@ code {
   background-color: #9999CC;
   text-color: #000000	
 }
-=======
+
 /* Inputs and Links */ /*663366 is color of clicked link*/
 .link-button-class{
   /*Link class text color and text decoration must be done inline styling for some reason*/	
