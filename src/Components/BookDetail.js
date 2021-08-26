@@ -156,18 +156,20 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
                 <p><b>Genre:</b> {book.genre}</p>
                 <p><b>Page Count:</b> {book.page_count}</p>
                 <div>{reviewMap}</div>
-                <h3>Add a Review</h3>
                 {Object.keys(currentUser).length === 0 ?
-                    <h3>Please select a user</h3> :
+                <h3>Please select a user to add a review</h3> :
+                <>
+                <h3>Add a Review</h3>
                     <form className = "form-div" onSubmit={onSubmit}>
-                    <label htmlFor="rating">Rating(1-5): </label>
-                    <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" name="rating" min="1" max="5" placeholder="1-5"/>
-                    <label htmlFor="content">Review:</label>
-                    <input onChange={manageReviewFormData} value={addReviewFormData.content} type="text" name="content" placeholder="add review..."/>
-                    <button type="submit">Submit</button>
-                </form>}
+                        <label htmlFor="rating">Rating(1-5): </label>
+                        <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" id="rating" name="rating" min="1" max="5" placeholder="1-5"/>
+                        <label htmlFor="content">Review:</label>
+                        <input onChange={manageReviewFormData} value={addReviewFormData.content} type="textarea" id="content" name="content" placeholder="add review..."/>
+                        <button type="submit">Submit</button>
+                    </form>
+                </>}
                 <button>
-                <Link to="/books" onClick={handleClick} >Go back</Link>
+                <Link to="/books" onClick={handleClick} style={{ textDecoration: 'none' }}>Go back</Link>
                 </button>
             </div>
         </div>

@@ -51,31 +51,31 @@ function AddBookForm({ books, setBooks }){
 
     return (
         <div>
-            <form onSubmit={onSubmitNewBook}>
+            <form className="form-div" onSubmit={onSubmitNewBook}>
                 <div>
                     <label htmlFor="title">Title: </label>
                     <input onChange={manageAddFormData} value={addBookFormData.title}
-                    type="text" name="title" placeholder="title"/>
+                    type="text" id="title" name="title" placeholder="title"/>
                 </div>
                 <div>
                     <label htmlFor="author">Author: </label>
                     <input onChange={manageAddFormData} value={addBookFormData.author}
-                    type="text" name="author" placeholder="author"/>
+                    type="text" id="author" name="author" placeholder="author"/>
                 </div>
                 <div>
                     <label htmlFor="publisher">Publisher: </label>
                     <input onChange={manageAddFormData} value={addBookFormData.publisher}
-                    type="text" name="publisher" placeholder="publisher"/>
+                    type="text" id="publisher" name="publisher" placeholder="publisher"/>
                 </div>
                 <div>
                     <label htmlFor="genre">Genre: </label>
                     <input onChange={manageAddFormData} value={addBookFormData.genre}
-                    type="text" name="genre" placeholder="genre"/>
+                    type="text" id="genre" name="genre" placeholder="genre"/>
                 </div>
                 <div>
                     <label htmlFor="page_count">Page Count: </label>
                     <input onChange={manageAddFormData} value={addBookFormData.page_count}
-                    type="number" name="page_count" placeholder="#" min="0"/>
+                    type="number" id="page_count" name="page_count" placeholder="#" min="0"/>
                 </div>
                 <div>
                     <button type="submit" className="add-book-button">Add New Book</button>
