@@ -78,7 +78,7 @@ function AddBookForm({ books, setBooks }){
                     type="number" id="page_count" name="page_count" placeholder="#" min="0"/>
                 </div>
                 <div>
-                    <button type="submit" className="add-book-button">Add New Book</button>
+                    <button type="submit" className="submit-input">Add New Book</button>
                 </div>
             </form>
         </div>

@@ -36,7 +36,6 @@ function App() {
       <Route exact path="/">
         <HomePage users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
       </Route>
-      {/* <Redirect to="/home"/> */}
     </div>
   );
 }

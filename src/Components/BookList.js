@@ -8,9 +8,6 @@ function BookList({ users, books, setBooks, isClickedBook, setIsClickedBook, cur
         return <BookListItem key={book.id} book={book} setIsClickedBook={setIsClickedBook} />
     })
 
-    // const bookSpecific = books.map((book) => {
-    //     return <BookDetail key={book.id} book={book}/>
-    // })
     const match = useRouteMatch()
 
     const params = useParams()
@@ -25,7 +22,7 @@ function BookList({ users, books, setBooks, isClickedBook, setIsClickedBook, cur
             </Route> :
             <div>
                 {!location.pathname.includes("add") && Object.keys(currentUser).length > 0 ? 
-                <button className="link-button-class"><Link to="/books/add" style={{ textDecoration: 'none'}} >Add New Book</Link></button> : null
+                <button className="link-button-class"><Link to="/books/add" style={{ textDecoration: 'none', color: 'slateblue' }} >Add New Book</Link></button> : null
                 }
                 {bookconstant} 
             </div>}

@@ -28,9 +28,16 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
 
         return (
             <div className = "reviews" key = {review.id}>
-            <p>Rating from: {reviewUser.name} Review: {review.content} Rating: {stars}</p>
-            {review.user_id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
-            {review.user_id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
+                <p>Rating from: {reviewUser.name}</p> 
+                <p>Review: {review.content}</p>
+                <p>Rating: {stars}</p>
+
+                {review.user_id === currentUser.id ? 
+                <>
+                    <button name={review.id} className="submit-input" onClick={onEditReviewClick}>Edit Review</button> 
+                    <button name ={review.id} className="submit-input" onClick ={deleteReview}>Delete Review</button>
+                </>
+                : null}
             </div> 
         )
     })
@@ -57,10 +64,6 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
             console.log(deleteBooks)
             setReviews(deleteBooks)
         })
-        // const deleteBooks = book.reviews.filter((review) => review.id !== event.target.name)
-        // let index = books.findIndex(oneBook => oneBook.id === book.id)
-        // .then(response => response.json())
-        // .then(data => books.reviews.filter((review) => review.id !== data.id))
     }
 
     function manageReviewFormData(e) {
@@ -76,12 +79,6 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
     function onSubmit(e){
         e.preventDefault()
         if (!isEditReview) {
-            console.log('post', addReviewFormData)
-            console.log(currentUser.id)
-            // const aaaaWork = [addReviewFormData, ...reviews]
-            // console.log("aaaaWork", aaaaWork)
-            // setReviews(aaaaWork)
-            // console.log("After setReviews", reviews)
             fetch(`${process.env.REACT_APP_API_URL}/reviews/add`, {
                 method: "POST",
                 header: {
@@ -92,13 +89,7 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
             })
             .then(response => response.json())
             .then(data => {
-                console.log('AddReview response data:', data)
-                // reviews.push(data)
-                // let index = books.findIndex(oneBook => oneBook.id === book.id)
-                // const aaaaHelp = [data, ...reviews]
-                // console.log("aaaaHelp", aaaaHelp)
                 setReviews(previousReviews => [data, ...previousReviews])
-                console.log("did we get this far? Reviews:", reviews)
                 setAddReviewFormData({  
                     content: "",
                     rating: "",
@@ -122,8 +113,6 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
                 setIsEditReview(false)
                 let reviewId = reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
                 reviews[reviewId] = editedReviewData
-                // let index = books.findIndex(oneBook => oneBook.id === book.id)
-                // books[index] = book
                 setReviews(reviews)
                 setAddReviewFormData({   
                     content: "",
@@ -165,11 +154,11 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
                         <input onChange={manageReviewFormData} value={addReviewFormData.rating} type="number" id="rating" name="rating" min="1" max="5" placeholder="1-5"/>
                         <label htmlFor="content">Review:</label>
                         <input onChange={manageReviewFormData} value={addReviewFormData.content} type="textarea" id="content" name="content" placeholder="add review..."/>
-                        <button type="submit">Submit</button>
+                        <button type="submit" className="submit-input">Submit</button>
                     </form>
                 </>}
                 <button className="link-button-class">
-                <Link to="/books" onClick={handleClick} style={{ textDecoration: 'none' }}>Go back</Link>
+                <Link to="/books" onClick={handleClick} style={{ textDecoration: 'none', color: 'slateblue'  }}>Go back</Link>
                 </button>
             </div>
         </div>

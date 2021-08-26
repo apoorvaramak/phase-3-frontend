@@ -10,7 +10,13 @@ function UserDetail({users, setIsClickedUser }){
     console.log(user)
 
     const reviewMap = user.reviews.map((review) => {
-        return (<p key={review.id}>Book: {review.book.title} Review: {review.content} Rating: {review.rating}</p>)
+        return (
+            <div className = "reviews" key={review.id}>
+                <p>Book: {review.book.title}</p>
+                <p>Review: {review.content} </p> 
+                <p>Rating: {review.rating}</p>
+            </div>
+        )
     })
     
     function handleClick(){
@@ -26,7 +32,7 @@ function UserDetail({users, setIsClickedUser }){
                 <p>Level: {Math.ceil(user.xp/300)}</p>
                 <div>{reviewMap}</div>
                 <button className="link-button-class" >
-                <Link to="/users" onClick={handleClick} style={{ textDecoration: 'none' }}>Go back</Link>
+                    <Link to="/users" onClick={handleClick} style={{ textDecoration: 'none', color: 'slateblue' }}>Go back</Link>
                 </button>
             </div>
         </div>

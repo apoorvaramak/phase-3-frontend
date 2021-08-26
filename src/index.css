@@ -102,8 +102,13 @@ code {
   padding: 25px; 
 }
 
-/*Link class*/
+/*Link class text color must be done inline styling*/
 .link-button-class{
-  background-color: #9999CC;
-  text-color: #000000	
+  background-color: #cfcff5;	
+}
+/*663366*/
+/* Submit Inputs */
+.submit-input{
+  background-color: #cfcff5;
+  color: #6A5ACD	
 }

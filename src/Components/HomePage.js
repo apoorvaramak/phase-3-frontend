@@ -82,10 +82,10 @@ function HomePage({ users, currentUser, setCurrentUser }) {
 					<img src = {currentUser.pfp} alt="profile-pic"  width="150px" height="150px"></img>
 					<form onSubmit={handleSubmit}>
 						<input type="text" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
-					<input type="submit" value="Submit" />
-					<h3>Books I've Read</h3>
+						<input className="submit-input" type="submit" value="Submit" />
+						<h3>Books I've Read</h3>
+					</form>
 					{books}
-				</form>
 				</div>
 			</div>
 		)
