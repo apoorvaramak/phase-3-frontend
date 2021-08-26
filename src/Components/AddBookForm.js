@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function AddBookForm({ books, setBooks }){
+    let history = useHistory()
     const [ addBookFormData, setAddBookFormData ] = useState({
         title: "",
         author: "",
@@ -32,9 +34,7 @@ function AddBookForm({ books, setBooks }){
         .then(response => response.json())
         .then(data => {
             setBooks([data, ...books])
-        // })
-        // {
-            // setReviews([data, ...reviews])
+            //if want new book to go to bottom switch data and ...books order
             setAddBookFormData({
                 title: "",
                 author: "",
@@ -43,7 +43,8 @@ function AddBookForm({ books, setBooks }){
                 page_count: 0,
                 id: null
             })
-        }) 
+            history.push("/books")
+        })
       }
 
 

@@ -1,6 +1,6 @@
 import BookListItem from './BookListItem'
 import BookDetail from './BookDetail'
-import { Route, Link, useParams, useRouteMatch } from 'react-router-dom';
+import { Route, Link, useParams, useRouteMatch, useLocation } from 'react-router-dom';
 
 function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUser }){
 
@@ -15,9 +15,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUse
 
     const params = useParams()
 
-    function addBookClick(e){
-        e.stopPropagation()
-    }
+    const location = useLocation()
 
     return  (
         <div className ="book-list">
@@ -26,7 +24,9 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUse
                 <BookDetail key = {params.id} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
             </Route> :
             <div>
-                <Link to="/books/add" onClick={addBookClick} >Add New Book</Link>
+                {!location.pathname.includes("add") ? 
+                <Link to="/books/add"  >Add New Book</Link> : null
+                }
                 {bookconstant} 
             </div>}
         </div>
