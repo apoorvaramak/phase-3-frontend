@@ -62,23 +62,35 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		)
 	} else { 
 		const books = currentUser.reviews.map((review) => {
-			return (<p key = {review.id}>{review.book.title} by {review.book.author}</p>)
+			console.log(review)
+			const date = review.updated_at.slice(0, 10)
+			return (
+				<div className = "the-reviews" key = {review.id}>
+					<h4>{review.book.title} by {review.book.author}</h4>
+					<p><b>Review:</b> {review.content}</p>
+					<p style={{fontSize: 10}}>({date})</p>
+				</div>
+			)
 		})
 		return(
 			<div>
 				<h1>Welcome, {currentUser.name}!</h1>
-	            <form className="form-div">
+				<form className="form-div">
 					<h2>Select a Different User</h2>
 					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
 				</form>
-				<div>
+				<div className = "homepage-reviews">
+					<div className = "pfp">
 					<img src = {currentUser.pfp} alt="profile-pic"  width="150px" height="150px"></img>
 					<form onSubmit={handleSubmit}>
 						<input type="text" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
 					<input type="submit" value="Submit" />
-					<h3>Books I've Read</h3>
-					{books}
 					</form>
+					</div>
+					<div className = "books-read">
+						<h3>Books I've Read</h3>
+						{books}
+					</div>
 				</div>
 			</div>
 		)
