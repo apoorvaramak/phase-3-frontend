@@ -23,7 +23,7 @@ function NavBar({ users, setIsClickedUser, setIsClickedBook, currentUser, setCur
     return(
         <nav className="navigation">
 
-            <NavLink exact to="/home"><li>Home</li></NavLink>
+            <NavLink exact to="/"><li>Home</li></NavLink>
             <NavLink exact to="/books" onClick={handleBookClick}><li>Books</li></NavLink>
             <NavLink exact to="/users" onClick={handleUserClick}><li>Users</li></NavLink>
             <div>
