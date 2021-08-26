@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
-    //form set up for reviews no user_id do we want to keep or hardcode a user_id?
-    // console.log("BookDetail", currentUser.id)
+function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
     const [addReviewFormData, setAddReviewFormData] = useState({
         content: "",
         rating: "",
@@ -18,18 +16,19 @@ function BookDetail({books, setBooks, setIsClickedBook, currentUser }){
     const [isEditReview, setIsEditReview] = useState(false)
     const [reviews, setReviews] = useState(book.reviews)
 
-    console.log("Before reviewsMap:", reviews)
     const reviewMap = reviews.map((review) => {
-        console.log(review)
         let num = review.rating;
         let stars = '';
         while(num > 0){
             stars += "⭐";
             num -= 1;
         }
+
+        let reviewUser = users.find (user => user.id === review.user_id)
+
         return (
             <div className = "reviews" key = {review.id}>
-            <p>Rating from: {review.user_id} Review: {review.content} Rating: {stars}</p>
+            <p>Rating from: {reviewUser.name} Review: {review.content} Rating: {stars}</p>
             {review.user_id === currentUser.id ? <button name={review.id} onClick={onEditReviewClick}>Edit Review</button> : null}
             {review.user_id === currentUser.id ? <button name ={review.id} onClick ={deleteReview}>Delete Review</button> : null}  
             </div> 

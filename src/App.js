@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <NavBar users={users} setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <Route path="/books">
-        <BookContainer setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} />
+        <BookContainer users={users} setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} />
       </Route>
       <Route path="/users">
         <UserContainer users={users} setIsClickedUser={setIsClickedUser} isClickedUser={isClickedUser} />
