@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import UserList from './UserList'
 // import { Route, Switch, useRouteMatch } from 'react-router-dom';
 // import UserDetail from './UserDetail'

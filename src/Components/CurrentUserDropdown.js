@@ -17,7 +17,6 @@ function CurrentUserDropdown({ users, currentUser, setCurrentUser }) {
 	// 	console.log(e)
 	// }
 
-	console.log("CurrentUserDropdown/currentUser:", currentUser)
 	return (
 		<Fragment>
 			{Object.keys(currentUser).length > 0 ?

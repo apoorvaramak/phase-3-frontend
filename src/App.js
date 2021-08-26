@@ -34,7 +34,7 @@ function App() {
         <UserContainer users={users} setIsClickedUser={setIsClickedUser} isClickedUser={isClickedUser} />
       </Route>
       <Route exact path="/">
-        <HomePage users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <HomePage users={users} setUsers={setUsers} currentUser={currentUser} setCurrentUser={setCurrentUser} />
       </Route>
       {/* <Redirect to="/home"/> */}
     </div>

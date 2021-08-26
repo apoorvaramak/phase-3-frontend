@@ -1,32 +1,18 @@
-import { Fragment } from "react"
 import CurrentUserDropdown from './CurrentUserDropdown';
 import {useState} from 'react'
+import AddUserForm from './AddUserForm';
 
-function HomePage({ users, currentUser, setCurrentUser }) {
-	// const [chosenUser, setChosenUser] = useState({})
-	// const [selectedUser, setSelectedUser] = useState({})
+function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
+	console.log(currentUser)
 	const [pfp, setPfp] = useState("")
-	// console.log(currentUser)
-	// console.log(9, pfp)
-	// console.log(currentUser.pfp)
 
-	// const userOptions = users.map(user => <HomeUserOption key = {user.id} user={user} />)
-
-	const handleChange = (e) => {
-		const selectedUser = users.find(user => user.id == e.target.value)
-		setCurrentUser(selectedUser)
-		// console.log("Homepage/handleChange", e.target.value, selectedUser)
-	}
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		updateUser()
 		console.log("clicked")
-		// console.log(e)
 	}
 
 	function handleChangePfp(event){
-		// console.log(event.target.value)
-		// console.log(event.target.value)
 		setPfp(event.target.value)
 	}
 
@@ -56,17 +42,22 @@ function HomePage({ users, currentUser, setCurrentUser }) {
 			})
 		}).then(response => response.json())
 		.then(data => updatePfp(data))
-
 		// setCurrentUser(updatedUser)
-
 	}
-	// console.log(currentUser)
 
 	if (Object.keys(currentUser).length === 0) {
 		return(
 			<div>
-				<h1>Welcome! Please select a User!</h1>
-				<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+				<h1>Welcome!</h1>
+	            <form className="form-div">
+					<h2>Login As:</h2>
+					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+				</form>
+				{/* <h1>Or add a new user:</h1> */}
+				<h2></h2>
+				<div>
+					<AddUserForm users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />
+				</div>
 			</div>
 		)
 	} else { 
@@ -76,8 +67,10 @@ function HomePage({ users, currentUser, setCurrentUser }) {
 		return(
 			<div>
 				<h1>Welcome, {currentUser.name}!</h1>
-				<h3>Select a different user:</h3>
-				<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+	            <form className="form-div">
+					<h2>Select a Different User</h2>
+					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+				</form>
 				<div>
 					<img src = {currentUser.pfp} alt="profile-pic"  width="150px" height="150px"></img>
 					<form onSubmit={handleSubmit}>
@@ -85,7 +78,7 @@ function HomePage({ users, currentUser, setCurrentUser }) {
 					<input type="submit" value="Submit" />
 					<h3>Books I've Read</h3>
 					{books}
-				</form>
+					</form>
 				</div>
 			</div>
 		)
