@@ -101,11 +101,7 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 					<p style={{fontSize: "10px"}}>change you profile picture</p>
 					<form onSubmit={handleSubmit}>
 						<input type="text" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
-<<<<<<< HEAD
-					<input className = "submit-button" type="submit" value="Submit" />
-=======
 					<input type="submit" className="submit-input" value="Submit" />
->>>>>>> elisa-styling-2
 					</form>
 					<p>Birthday: {currentUser.birthday}</p>
 					<p>XP: {currentUser.xp}</p>
