@@ -102,6 +102,7 @@ code {
   padding: 25px; 
 }
 
+<<<<<<< HEAD
 .homepage-reviews{
   display: flex;
   justify-content: center; 
@@ -121,4 +122,28 @@ code {
 .link-button-class{
   background-color: #9999CC;
   text-color: #000000	
+}
+=======
+/* Inputs and Links */ /*663366 is color of clicked link*/
+.link-button-class{
+  /*Link class text color and text decoration must be done inline styling for some reason*/	
+  background-color: #cfcff5;
+  border:  1px solid #7e7cfc;
+  padding: 3px 14px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;	
+  cursor: pointer;
+}
+
+.submit-input{
+  background-color: #cfcff5;
+  color: #6A5ACD;
+  border:  1px solid #7e7cfc;
+  padding: 3px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;	
+  cursor: pointer;
 }
