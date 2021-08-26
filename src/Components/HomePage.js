@@ -66,7 +66,7 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 			const date = review.updated_at.slice(0, 10)
 			return (
 				<div className = "the-reviews" key = {review.id}>
-					<h4>{review.book.title} by {review.book.author}</h4>
+					<h4><i>{review.book.title}</i> by {review.book.author}</h4>
 					<p><b>Review:</b> {review.content}</p>
 					<p style={{fontSize: 10}}>({date})</p>
 				</div>
@@ -75,23 +75,27 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		return(
 			<div>
 				<h1>Welcome, {currentUser.name}!</h1>
-				<form className="form-div">
-					<h2>Select a Different User</h2>
-					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
-				</form>
 				<div className = "homepage-reviews">
 					<div className = "pfp">
 					<img src = {currentUser.pfp} alt="profile-pic"  width="150px" height="150px"></img>
+					<p style={{fontSize: "10px"}}>change you profile picture</p>
 					<form onSubmit={handleSubmit}>
 						<input type="text" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
-					<input type="submit" value="Submit" />
+					<input className = "submit-button" type="submit" value="Submit" />
 					</form>
+					<p>Birthday: {currentUser.birthday}</p>
+					<p>XP: {currentUser.xp}</p>
+					<p>level: {Math.ceil(currentUser.xp/300)}</p>
 					</div>
 					<div className = "books-read">
 						<h3>Books I've Read</h3>
 						{books}
 					</div>
 				</div>
+				<form className="form-div">
+					<h2>Select a Different User</h2>
+					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+				</form>
 			</div>
 		)
 	}
