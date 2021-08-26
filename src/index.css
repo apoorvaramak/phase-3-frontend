@@ -101,3 +101,9 @@ code {
   background-color: #fffcf5;
   padding: 25px; 
 }
+
+/*Link class*/
+.link-button-class{
+  background-color: #9999CC;
+  text-color: #000000	
+}

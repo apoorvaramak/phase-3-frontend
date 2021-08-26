@@ -20,11 +20,14 @@ function UserDetail({users, setIsClickedUser }){
         <div>
             <div className="detail-div">
                 <p>Name: {user.name}</p>
+                <img src={user.pfp} />
                 <p>Birthday: {user.birthday}</p>
                 <p>XP: {user.xp}</p>
                 <p>Level: {Math.ceil(user.xp/300)}</p>
                 <div>{reviewMap}</div>
-                <Link to="/users" onClick={handleClick}>Go back</Link>
+                <button className="link-button-class" >
+                <Link to="/users" onClick={handleClick} style={{ textDecoration: 'none' }}>Go back</Link>
+                </button>
             </div>
         </div>
     )
