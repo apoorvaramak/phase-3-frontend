@@ -11,7 +11,8 @@ function BookContainer({ isClickedBook, setIsClickedBook, currentUser }){
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/books`, {
             header: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Accept: "application/json"
             } 
         })
         .then(response => response.json())
