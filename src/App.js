@@ -1,4 +1,4 @@
-import { Redirect, Route  } from 'react-router-dom';
+import { Route  } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import NavBar from './Components/NavBar';
 import './App.css';
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
+      <NavBar users={users} setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <Route path="/books">
         <BookContainer setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} />
       </Route>

@@ -1,6 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import CurrentUserDropdown from './CurrentUserDropdown';
 
-function NavBar({ setIsClickedUser, setIsClickedBook, currentUser }){
+function NavBar({ users, setIsClickedUser, setIsClickedBook, currentUser, setCurrentUser }){
+    // console.log("Navbar:", currentUser)
+
+	// const userOptionsNo = users.map(user => <HomeUserOptionNo user={user} />)
+	// const userOptionsYes = users.map(user => <HomeUserOptionYes user={user} currentUser={currentUser} />)
 
     function handleUserClick() {
         setIsClickedUser(false)
@@ -10,13 +15,21 @@ function NavBar({ setIsClickedUser, setIsClickedBook, currentUser }){
         setIsClickedBook(false)
     }
 
+    // const handleChange = (e) => {
+	// 	const selectedUser = users.find(user => user.id == e.target.value)
+	// 	setCurrentUser(selectedUser)
+	// }
+
     return(
         <nav className="navigation">
 
             <NavLink exact to="/home"><li>Home</li></NavLink>
             <NavLink exact to="/books" onClick={handleBookClick}><li>Books</li></NavLink>
             <NavLink exact to="/users" onClick={handleUserClick}><li>Users</li></NavLink>
-            {Object.keys(currentUser).length === 0 ? <div>Hi, new user!</div> : <div>Hi, {currentUser.name}!</div>}
+            <div>
+                Hi, <span> </span>
+                <CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} /><span> </span>!
+            </div>
         </nav>
     )
 }

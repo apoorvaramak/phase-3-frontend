@@ -24,7 +24,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUse
                 <BookDetail key = {params.id} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
             </Route> :
             <div>
-                {!location.pathname.includes("add") ? 
+                {!location.pathname.includes("add") && Object.keys(currentUser).length > 0 ? 
                 <Link to="/books/add"  >Add New Book</Link> : null
                 }
                 {bookconstant} 
