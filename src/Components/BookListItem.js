@@ -23,7 +23,7 @@ function BookListItem({book, setIsClickedBook }){
     return(
         <div>
             <div className="list-div">
-                <p><Link to={`/books/${book.id}`} onClick={handleClick} ><b>Title:</b> {book.title}</Link></p>
+                <p><Link to={`/books/${book.id}`} onClick={handleClick} style={{ textDecoration: 'none', color: 'slateblue' }}><b>Title:</b> {book.title}</Link></p>
                 <p><b>Author:</b> {book.author}</p>
             </div>
         </div>

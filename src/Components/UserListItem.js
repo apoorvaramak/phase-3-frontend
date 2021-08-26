@@ -21,7 +21,7 @@ function UserListItem({ user, users, setIsClickedUser }){
         <div>
             {/* <div className="detail-div" onClick = {handleShowDetails}> */}
             <div className="detail-div" >
-                <p><Link to={`/users/${user.id}`} onClick={handleClick}>Name: {user.name}</Link></p>
+                <p><Link to={`/users/${user.id}`} onClick={handleClick} style={{ textDecoration: 'none', color: 'slateblue' }}>Name: {user.name}</Link></p>
             </div> 
             {/* <Route path="/users/:id">
                 <UserDetail key={params.id} user={user}/>

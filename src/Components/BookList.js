@@ -25,7 +25,7 @@ function BookList({ books, setBooks, isClickedBook, setIsClickedBook, currentUse
             </Route> :
             <div>
                 {(!location.pathname.includes("add") && (currentUser.id) )? 
-                <Link to="/books/add"  >Add New Book</Link> : null
+                <button><Link to="/books/add"  style={{ textDecoration: "none", color: "black" }}>Add New Book</Link> </button>: null
                 }
                 {bookconstant} 
             </div>}
