@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function AddUserForm({ users, setUsers, setCurrentUser }){
+function AddUserForm({ passSetUsers, setCurrentUser }){
     const [ addUserFormData, setAddUserFormData ] = useState({
         name: "",
         birthday: "",
@@ -16,16 +16,7 @@ function AddUserForm({ users, setUsers, setCurrentUser }){
             ...addUserFormData,
             [key]: value
         })
-		console.log("UserForm/addUserFormData:", addUserFormData)
     }
-
-	function manageChangeFormBirthday(e) {
-		console.log("ChangeBirthday:", e.target.value)
-	    setAddUserFormData({
-            ...addUserFormData,
-            ["birthday"]: e.target.value
-        })	
-	}
 
     function onSubmitNewUser(e){
         e.preventDefault()
@@ -41,8 +32,7 @@ function AddUserForm({ users, setUsers, setCurrentUser }){
         .then(response => response.json())
         .then(data => {
 			console.log("first data", data)
-            setUsers([data, ...users])
-            //if want new User to go to bottom switch data and ...Users order
+            passSetUsers(data)
 			setCurrentUser(data)
             setAddUserFormData({
                 name: "",
@@ -68,7 +58,7 @@ function AddUserForm({ users, setUsers, setCurrentUser }){
                 </div>
                 <div>
                     <label htmlFor="birthday">Birthday: </label>
-                    <input onChange={manageChangeFormBirthday} value={addUserFormData.birthday}
+                    <input onChange={manageAddFormData} value={addUserFormData.birthday}
                     type="date" id="birthday" name="birthday" />
                 </div>
                 <div>
