@@ -168,7 +168,7 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
                         <button type="submit">Submit</button>
                     </form>
                 </>}
-                <button>
+                <button className="link-button-class">
                 <Link to="/books" onClick={handleClick} style={{ textDecoration: 'none' }}>Go back</Link>
                 </button>
             </div>
