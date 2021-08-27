@@ -1,12 +1,15 @@
 
 function UserBookListItem({ review }) {
-	const date = parseInt(review.updated_at.slice(0, 10))
-	const timeNow = new Date().getTime() / 1000
-	const timeDiff = parseInt((timeNow - review.updated_at))
+	// const date = parseInt(review.updated_at.slice(0, 10))
+	const date = Date.parse(review.updated_at)
+	const timeNow = new Date().getTime() 
+	const timeDiff = parseInt((timeNow - date))
 	const timeDisplayHours = parseInt(timeDiff/3600)
 	const timeDisplayDays = parseInt(timeDiff/(3600 * 24))
+	const timeDisplayMonths = parseInt(timeDiff/(3600 * 24 * 30))
+	const timeDisplayYears = parseInt(timeDiff/(3600 * 24 * 365))
 
-	console.log(review.updated_at)
+	console.log(review.updated_at, "date:", date, "timeNow", timeNow, "timeDiff", timeDiff)
 
 	const timeToDisplay = () => {
 		if (timeDiff < 3600) {
@@ -17,8 +20,14 @@ function UserBookListItem({ review }) {
 			return(`${timeDisplayHours} hours ago`)
 		} else if (timeDiff < 172800) {
 			return(`${timeDisplayDays} day ago`)
-		} else {
+		} else if (timeDiff < 5256000) {
 			return(`${timeDisplayDays} days ago`)
+		} else if (timeDiff < 31536000) {
+			return(`${timeDisplayMonths} months ago`)
+		} else if (timeDiff < 63072000) {
+			return("1 year ago")
+		} else {
+			return(`${timeDisplayYears} years ago`)
 		}
 	}
 		
