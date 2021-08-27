@@ -23,10 +23,11 @@ function App() {
       .then(data => setUsers(data))
   }, [])
 
+  const funcSetCurrentUser = (newUser) => {setCurrentUser(newUser)}
 
   return (
     <div className="App">
-      <NavBar users={users} setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <NavBar users={users} setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={funcSetCurrentUser} />
       <Route path="/books">
         <BookContainer users={users} setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} />
       </Route>
@@ -34,7 +35,7 @@ function App() {
         <UserContainer users={users} setIsClickedUser={setIsClickedUser} isClickedUser={isClickedUser} />
       </Route>
       <Route exact path="/">
-        <HomePage users={users} setUsers={setUsers} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <HomePage users={users} setUsers={setUsers} currentUser={currentUser} setCurrentUser={funcSetCurrentUser} />
       </Route>
     </div>
   );

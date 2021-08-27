@@ -19,6 +19,8 @@ function CurrentUserDropdown({ users, currentUser, setCurrentUser }) {
 	if (Object.keys(currentUser).length > 0) {
 		defaultID = currentUser.id
 		console.log("Dropdown/defaultID:", defaultID)
+	} else {
+		console.log("Dropdown/defaultID/NoCurrentUser:", defaultID)
 	}
 
 	return (
@@ -29,7 +31,7 @@ function CurrentUserDropdown({ users, currentUser, setCurrentUser }) {
 					{userOptions}
 				</select>
 			:
-				<select onChange={handleChange} defaultValue={defaultID}>
+				<select onChange={handleChange} value={defaultID}>
 					{userOptions}
 				</select>
 			}

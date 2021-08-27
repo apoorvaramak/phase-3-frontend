@@ -1,6 +1,5 @@
 
 function UserBookListItem({ review }) {
-	// const date = parseInt(review.updated_at.slice(0, 10))
 	const date = Date.parse(review.updated_at)
 	const timeNow = new Date().getTime() 
 	const timeDiff = parseInt((timeNow - date))
@@ -9,7 +8,7 @@ function UserBookListItem({ review }) {
 	const timeDisplayMonths = parseInt(timeDiff/(3600 * 24 * 30))
 	const timeDisplayYears = parseInt(timeDiff/(3600 * 24 * 365))
 
-	console.log(review.updated_at, "date:", date, "timeNow", timeNow, "timeDiff", timeDiff)
+	// console.log(review.updated_at, "date:", date, "timeNow", timeNow, "timeDiff", timeDiff)
 
 	const timeToDisplay = () => {
 		if (timeDiff < 3600) {
