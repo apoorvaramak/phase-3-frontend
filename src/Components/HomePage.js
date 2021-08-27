@@ -50,6 +50,14 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 		setUsers([newUser, ...users])
 	}
 
+	let renderBirthday = ""
+	if (Object.keys(currentUser).length > 0) {
+		let msec = Date.parse(currentUser.birthday)
+		let renderBirthdayDate = new Date(msec)
+		let monthDay = renderBirthdayDate.toDateString().slice(4, 10)
+		let yearYear = renderBirthdayDate.toDateString().slice(11)
+		renderBirthday = `${monthDay}, ${yearYear}`
+	}
 
 	return(
 		<Fragment>
@@ -76,7 +84,7 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 						<input type="text" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
 					<input type="submit" className="submit-input" value="Submit" />
 					</form>
-					<p>Birthday: {currentUser.birthday}</p>
+					<p>Birthday: {renderBirthday}</p>
 					<p>XP: {currentUser.xp}</p>
 					<p>level: {Math.ceil(currentUser.xp/300)}</p>
 					</div>
