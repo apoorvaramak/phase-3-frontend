@@ -81,6 +81,7 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 					<img src = {currentUser.pfp} alt="profile-pic"  width="150px" height="150px"></img>
 					<form onSubmit={handleSubmit}>
 						<label htmlFor="profile" style={{fontSize: "10px"}}>Change your profile picture:</label>
+						<br/>
 						<input type="text" id="profile" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
 					<input type="submit" className="submit-input" value="Submit" />
 					</form>
