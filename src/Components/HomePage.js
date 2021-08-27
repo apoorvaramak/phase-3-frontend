@@ -56,10 +56,10 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 			{Object.keys(currentUser).length === 0 ?
 			<div>
 				<h1>Welcome!</h1>
-	            <form className="form-div">
+	            <div className="form-div">
 					<h2>Login As:</h2>
 					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
-				</form>
+				</div>
 				<h2></h2>
 				<div>
 					<AddUserForm passSetUsers={passSetUsers} setCurrentUser={setCurrentUser} />
@@ -86,10 +86,10 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 						{/* {books} */}
 					</div>
 				</div>
-				<form className="form-div">
+				<div className="form-div">
 					<h2>Select a Different User</h2>
 					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
-				</form>
+				</div>
 			</div>
 			}
 		</Fragment>

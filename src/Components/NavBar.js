@@ -2,10 +2,7 @@ import { NavLink } from 'react-router-dom';
 import CurrentUserDropdown from './CurrentUserDropdown';
 
 function NavBar({ users, setIsClickedUser, setIsClickedBook, currentUser, setCurrentUser }){
-    // console.log("Navbar:", currentUser)
-
-	// const userOptionsNo = users.map(user => <HomeUserOptionNo user={user} />)
-	// const userOptionsYes = users.map(user => <HomeUserOptionYes user={user} currentUser={currentUser} />)
+    console.log("Navbar:", currentUser)
 
     function handleUserClick() {
         setIsClickedUser(false)
