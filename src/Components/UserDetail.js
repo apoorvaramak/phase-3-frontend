@@ -1,13 +1,10 @@
 import { useParams, Link } from 'react-router-dom';
 
 function UserDetail({users, setIsClickedUser }){
-    console.log("hi from UserDetail", users)
 
     const id = useParams().id
-    console.log(id)
 
     const user = users.find(element => element.id == id)
-    console.log(user)
 
     const reviewMap = user.reviews.map((review) => {
         return (
