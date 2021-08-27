@@ -5,7 +5,7 @@ import { Route, Link, useParams, useRouteMatch, useLocation } from 'react-router
 function BookList({ users, books, setBooks, isClickedBook, setIsClickedBook, currentUser }){
 
     const bookconstant = books.map((book) => {
-        return <BookListItem key={book.id} book={book} setIsClickedBook={setIsClickedBook} />
+        return <BookListItem key={book.id} book={book} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
     })
 
     const match = useRouteMatch()
