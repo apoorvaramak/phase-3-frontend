@@ -110,6 +110,14 @@ code {
   padding: 25px; 
 }
 
+.user-list-div{
+  background-color: #fffcf5;
+  padding: 15px;
+  border: 1px solid black;
+  margin-left: 250px;
+  margin-right: 250px
+}
+
 .homepage-reviews{
   background-color: #fffcf5;
   display: flex;

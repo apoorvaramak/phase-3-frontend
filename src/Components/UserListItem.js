@@ -7,7 +7,7 @@ function UserListItem({ user, users, setIsClickedUser }){
     }
     return(
         <div>
-            <div className="detail-div" >
+            <div className="user-list-div" >
                 <p><Link to={`/users/${user.id}`} onClick={handleClick} style={{ textDecoration: 'none', color: 'slateblue' }}>{user.name}</Link></p>
             </div> 
         </div>
