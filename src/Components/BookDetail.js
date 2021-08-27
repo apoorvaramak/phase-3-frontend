@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
+function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser, setCurrentUser }){
     const [addReviewFormData, setAddReviewFormData] = useState({
         content: "",
         rating: "",
@@ -16,7 +16,9 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
     const [isEditReview, setIsEditReview] = useState(false)
     const [reviews, setReviews] = useState(book.reviews)
 
-    const reviewMap = reviews.map((review) => {
+    const realReviews = reviews.filter((review) => review.rating > 0 || review.content.length > 0 )
+
+    const reviewMap = realReviews.map((review) => {
         let num = review.rating;
         let stars = '';
         while(num > 0){
@@ -90,6 +92,10 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser }){
             .then(response => response.json())
             .then(data => {
                 setReviews(previousReviews => [data, ...previousReviews])
+                setCurrentUser({
+                    ...currentUser,
+                    xp: currentUser.xp + data.book.page_count
+                })
                 setAddReviewFormData({  
                     content: "",
                     rating: "",

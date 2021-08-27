@@ -1,4 +1,5 @@
 
+
 function UserBookListItem({ review }) {
 	const date = Date.parse(review.updated_at)
 	const timeNow = new Date().getTime() 
@@ -29,11 +30,11 @@ function UserBookListItem({ review }) {
 			return(`${timeDisplayYears} years ago`)
 		}
 	}
-		
+	
 	return (
 		<div className = "the-reviews" key = {review.id}>
 			<h4><i>{review.book.title}</i> by {review.book.author}</h4>
-			<p><b>Review:</b> {review.content}</p>
+			{review.content.length > 0 ? <p><b>Review:</b> {review.content}</p> : null}
 			<p style={{fontSize: 10}}>({timeToDisplay()})</p>
 		</div>
 	)

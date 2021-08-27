@@ -5,7 +5,7 @@ import AddBookForm from './AddBookForm';
 
 
 
-function BookContainer({ users, isClickedBook, setIsClickedBook, currentUser }){
+function BookContainer({ users, isClickedBook, setIsClickedBook, currentUser, setCurrentUser }){
     const [books, setBooks] = useState([])
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function BookContainer({ users, isClickedBook, setIsClickedBook, currentUser }){
             <Route path="/books/add">
                 <AddBookForm books={books} setBooks={setBooks}/>
             </Route>
-            <BookList users={users} books={books} setBooks={setBooks}  setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} />
+            <BookList users={users} books={books} setBooks={setBooks}  setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </div>
     )
 }

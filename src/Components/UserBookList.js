@@ -4,6 +4,7 @@ import UserBookListItem from './UserBookListItem'
 
 
 function UserBookList({ currentUser }) {
+	// const realReviews = currentUser.reviews.filter((review) => review.rating > 0 || review.content.length > 0 )
 	const userBooks = currentUser.reviews.map((review) => 
 		<UserBookListItem key={review.id} review={review} />
 	)

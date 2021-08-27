@@ -2,10 +2,10 @@ import BookListItem from './BookListItem'
 import BookDetail from './BookDetail'
 import { Route, Link, useParams, useRouteMatch, useLocation } from 'react-router-dom';
 
-function BookList({ users, books, setBooks, isClickedBook, setIsClickedBook, currentUser }){
+function BookList({ users, books, setBooks, isClickedBook, setIsClickedBook, currentUser, setCurrentUser }){
 
     const bookconstant = books.map((book) => {
-        return <BookListItem key={book.id} book={book} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
+        return <BookListItem key={book.id} book={book} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
     })
 
     const match = useRouteMatch()
@@ -18,7 +18,7 @@ function BookList({ users, books, setBooks, isClickedBook, setIsClickedBook, cur
         <div className ="book-list">
             {isClickedBook ? 
             <Route exact path={`${match.url}/:id`} >
-                <BookDetail key = {params.id} users={users} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} />
+                <BookDetail key = {params.id} users={users} books={books} setBooks={setBooks} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
             </Route> :
             <div>
                 {!location.pathname.includes("add") && Object.keys(currentUser).length > 0 ? 

@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-function BookListItem({book, setIsClickedBook, currentUser }){
-
+function BookListItem({book, setIsClickedBook, currentUser, setCurrentUser }){
+    
     const [reviews, setReviews] = useState(book.reviews)
 
+    let history = useHistory()
+    
     const isBookCurrentUsers = reviews.find(review => review.user_id === currentUser.id)
     // console.log("BookListItem", isBookCurrentUsers)
     
@@ -30,6 +32,11 @@ function BookListItem({book, setIsClickedBook, currentUser }){
         .then(response => response.json())
         .then(data => {
             setReviews(previousReviews => [data, ...previousReviews])
+            setCurrentUser({
+                ...currentUser,
+                xp: currentUser.xp + data.book.page_count
+            })
+            history.push("/books")
         }) 
     }
 

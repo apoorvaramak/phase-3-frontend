@@ -10,8 +10,8 @@ function UserDetail({users, setIsClickedUser }){
         return (
             <div className = "reviews" key={review.id}>
                 <p><b><em>{review.book.title}</em></b> by <b>{review.book.author}</b></p>
-                <p>Review: {review.content} </p> 
-                <p>Rating: {review.rating}</p>
+		    	{review.content.length > 0 ? <p><b>Review:</b> {review.content}</p> : null}
+                {review.rating > 0 ? <p>Rating: {review.rating}</p> : null}
             </div>
         )
     })
