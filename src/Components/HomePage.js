@@ -79,9 +79,9 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 				<div className = "homepage-reviews">
 					<div className = "pfp">
 					<img src = {currentUser.pfp} alt="profile-pic"  width="150px" height="150px"></img>
-					<p style={{fontSize: "10px"}}>change you profile picture</p>
 					<form onSubmit={handleSubmit}>
-						<input type="text" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
+						<label htmlFor="profile" style={{fontSize: "10px"}}>Change your profile picture:</label>
+						<input type="text" id="profile" placeholder="enter url here" onChange = {handleChangePfp} value = {pfp}></input>
 					<input type="submit" className="submit-input" value="Submit" />
 					</form>
 					<p>Birthday: {renderBirthday}</p>
