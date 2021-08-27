@@ -86,7 +86,7 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 						{/* {books} */}
 					</div>
 				</div>
-				<div className="form-div">
+				<div className="dropdown-div">
 					<h2>Select a Different User</h2>
 					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
 				</div>

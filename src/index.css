@@ -29,6 +29,14 @@ code {
   padding: 50px;
 }
 
+.dropdown-div {
+  background-color: #d8cfea;
+  margin-right: 150px; 
+  margin-left: 150px;
+  border: 1px solid #7e7cfc;
+  padding-bottom: 20px;
+}
+
 .back-button {
   margin-top: 30px;
   font-weight: 500;
