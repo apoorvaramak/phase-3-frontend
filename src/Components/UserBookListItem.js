@@ -2,13 +2,13 @@
 function UserBookListItem({ review }) {
 	const date = Date.parse(review.updated_at)
 	const timeNow = new Date().getTime() 
-	const timeDiff = parseInt((timeNow - date))
+	const timeDiff = parseInt((timeNow - date)/1000)
 	const timeDisplayHours = parseInt(timeDiff/3600)
 	const timeDisplayDays = parseInt(timeDiff/(3600 * 24))
 	const timeDisplayMonths = parseInt(timeDiff/(3600 * 24 * 30))
 	const timeDisplayYears = parseInt(timeDiff/(3600 * 24 * 365))
 
-	// console.log(review.updated_at, "date:", date, "timeNow", timeNow, "timeDiff", timeDiff)
+	// console.log(review.updated_at, "date:", date, "timeNow", timeNow, "timeDiff", timeDiff, "timeDisplayHours", timeDisplayHours)
 
 	const timeToDisplay = () => {
 		if (timeDiff < 3600) {
