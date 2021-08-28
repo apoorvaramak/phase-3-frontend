@@ -3,7 +3,7 @@ import { useState, Fragment } from 'react'
 import AddUserForm from './AddUserForm';
 import UserBookList from './UserBookList';
 
-function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
+function HomePage({ users, setUsers, currentUser, setCurrentUser, currentUserReviews, setCurrentUserReviews }) {
 
 	const [pfp, setPfp] = useState("")
 
@@ -66,9 +66,9 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 				<h1>Welcome!</h1>
 	            <div className="form-div">
 					<h2>Login As:</h2>
-					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentUserReviews={setCurrentUserReviews} />
 				</div>
-				<h2></h2>
+				<h2> </h2>
 				<div>
 					<AddUserForm passSetUsers={passSetUsers} setCurrentUser={setCurrentUser} />
 				</div>
@@ -91,13 +91,13 @@ function HomePage({ users, setUsers, currentUser, setCurrentUser }) {
 					</div>
 					<div className = "books-read">
 						<h3>Books I've Read</h3>
-						<UserBookList currentUser={currentUser} />
+						<UserBookList currentUser={currentUser} currentUserReviews={currentUserReviews} />
 						{/* {books} */}
 					</div>
 				</div>
 				<div className="dropdown-div">
 					<h2>Select a Different User</h2>
-					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+					<CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentUserReviews={setCurrentUserReviews} />
 				</div>
 			</div>
 			}

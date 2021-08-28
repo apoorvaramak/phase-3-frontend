@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import CurrentUserDropdown from './CurrentUserDropdown';
 
-function NavBar({ users, setIsClickedUser, setIsClickedBook, currentUser, setCurrentUser }){
+function NavBar({ users, setIsClickedUser, setIsClickedBook, currentUser, setCurrentUser, setCurrentUserReviews }){
 
     function handleUserClick() {
         setIsClickedUser(false)
@@ -19,7 +19,7 @@ function NavBar({ users, setIsClickedUser, setIsClickedBook, currentUser, setCur
             <NavLink exact to="/users" onClick={handleUserClick}><li>Users</li></NavLink>
             <div>
                 Hi, <span> </span>
-                <CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} /><span> </span>!
+                <CurrentUserDropdown users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentUserReviews={setCurrentUserReviews} /><span> </span>!
             </div>
         </nav>
     )

@@ -12,6 +12,9 @@ function App() {
   const [isClickedBook, setIsClickedBook] = useState(false)
   const [currentUser, setCurrentUser] = useState({})
   const [users, setUsers] = useState([]);
+  const [currentUserReviews, setCurrentUserReviews] = useState([])
+
+  // function updateReviews() {setCurrentUserReviews(!currentUserReviews)}
 
   useEffect(() => {
       fetch(`${process.env.REACT_APP_API_URL}/users`, {
@@ -27,15 +30,15 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar users={users} setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={funcSetCurrentUser} />
+      <NavBar users={users} setIsClickedUser={setIsClickedUser} setIsClickedBook={setIsClickedBook} currentUser={currentUser} setCurrentUser={funcSetCurrentUser} setCurrentUserReviews={setCurrentUserReviews} />
       <Route path="/books">
-        <BookContainer users={users} setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <BookContainer users={users} setIsClickedBook={setIsClickedBook} isClickedBook={isClickedBook} currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentUserReviews={setCurrentUserReviews} />
       </Route>
       <Route path="/users">
         <UserContainer users={users} setIsClickedUser={setIsClickedUser} isClickedUser={isClickedUser} />
       </Route>
       <Route exact path="/">
-        <HomePage users={users} setUsers={setUsers} currentUser={currentUser} setCurrentUser={funcSetCurrentUser} />
+        <HomePage users={users} setUsers={setUsers} currentUser={currentUser} setCurrentUser={funcSetCurrentUser} currentUserReviews={currentUserReviews} setCurrentUserReviews={setCurrentUserReviews} />
       </Route>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-function BookListItem({book, setIsClickedBook, currentUser, setCurrentUser }){
+function BookListItem({book, setIsClickedBook, currentUser, setCurrentUser, setCurrentUserReviews }){
     
     const [reviews, setReviews] = useState(book.reviews)
 
@@ -36,6 +36,7 @@ function BookListItem({book, setIsClickedBook, currentUser, setCurrentUser }){
                 ...currentUser,
                 xp: currentUser.xp + data.book.page_count
             })
+            setCurrentUserReviews((prevRev) => [...prevRev, data])
             history.push("/books")
         }) 
     }

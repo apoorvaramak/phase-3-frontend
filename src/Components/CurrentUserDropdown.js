@@ -1,12 +1,13 @@
 import HomeUserOption from './HomeUserOption';
 import { Fragment } from "react"
 
-function CurrentUserDropdown({ users, currentUser, setCurrentUser }) {
+function CurrentUserDropdown({ users, currentUser, setCurrentUser, setCurrentUserReviews }) {
 	const userOptions = users.map(user => <HomeUserOption key={user.id} user={user} />)
 
 	const handleChange = (e) => {
 		const selectedUser = users.find(user => user.id == e.target.value)
 		setCurrentUser(selectedUser)
+		setCurrentUserReviews(selectedUser.reviews)
 	}
 
 	let defaultID = 0

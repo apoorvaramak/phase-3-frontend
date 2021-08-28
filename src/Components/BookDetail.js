@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser, setCurrentUser }){
+function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser, setCurrentUser, setCurrentUserReviews }){
     const [addReviewFormData, setAddReviewFormData] = useState({
         content: "",
         rating: "",
@@ -65,6 +65,7 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser, set
             const deleteBooks = reviews.filter((review) => review.id !== data.id)
             console.log(deleteBooks)
             setReviews(deleteBooks)
+            setCurrentUserReviews((prevRev) => prevRev.filter((review) => review.id !== data.id))
         })
     }
 
@@ -96,6 +97,7 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser, set
                     ...currentUser,
                     xp: currentUser.xp + data.book.page_count
                 })
+                setCurrentUserReviews((prevRev) => [...prevRev, data])
                 setAddReviewFormData({  
                     content: "",
                     rating: "",
@@ -120,6 +122,7 @@ function BookDetail({ users, books, setBooks, setIsClickedBook, currentUser, set
                 let reviewId = reviews.findIndex(oneReview => oneReview.id === editedReviewData.id)
                 reviews[reviewId] = editedReviewData
                 setReviews(reviews)
+                setCurrentUserReviews((prevRev) => [...prevRev, editedReviewData])
                 setAddReviewFormData({   
                     content: "",
                     rating: "",
